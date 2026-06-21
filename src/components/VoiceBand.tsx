@@ -91,7 +91,7 @@ export default function VoiceBand() {
               </p>
 
               <a
-                href="#quote"
+                href="#book"
                 className="liquid-glass press-cta mt-10 inline-flex items-center gap-2 rounded-full px-9 py-4 text-base font-medium text-cream"
               >
                 Hear it on your business <span className="cta-arrow">&rarr;</span>

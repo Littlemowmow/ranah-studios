@@ -46,6 +46,10 @@ export interface BookingConfig {
   whatsAppNumber: string
   /** Pre-filled first message when a visitor taps the WhatsApp button. */
   whatsAppPrefill: string
+  /** Choices for the "What are you looking for?" booking qualifier (multi-select + Other). */
+  lookingForOptions: string[]
+  /** Budget bands shown in the booking qualifier — the serious-vs-tyre-kicker filter. */
+  budgetOptions: string[]
   services: Service[]
   weeklyHours: WeeklyHours
   /** Spacing of candidate start times, minutes. */
@@ -70,6 +74,13 @@ export const bookingConfig: BookingConfig = {
   // ⤵ paste the WhatsApp agent's number (Meta Cloud API test number) here, digits only, no '+'.
   whatsAppNumber: '',
   whatsAppPrefill: "Hi Ranah Studios! I'd like to know more about your websites and AI agents.",
+  lookingForOptions: [
+    'A website that ranks on Google',
+    'A 24/7 AI receptionist',
+    'Both — website + receptionist',
+    'Not sure yet — need advice',
+  ],
+  budgetOptions: ['Under $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000+', 'Not sure yet'],
   services: [
     {
       id: 'intro',

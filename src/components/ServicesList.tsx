@@ -59,7 +59,7 @@ const TIERS: Tier[] = [
 function DemoButton({ highlighted }: { highlighted?: boolean }) {
   return (
     <a
-      href="#quote"
+      href="#book"
       className={`press-cta group/btn mt-auto inline-flex w-full items-center justify-between gap-3 rounded-full px-5 py-3 text-sm font-medium transition-colors ${
         highlighted
           ? 'bg-gold text-ink-base hover:bg-gold-soft'

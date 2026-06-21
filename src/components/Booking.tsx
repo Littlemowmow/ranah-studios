@@ -283,13 +283,6 @@ export default function Booking() {
         </div>
         )}
 
-        <p className="mt-8 text-center text-sm text-muted">
-          Prefer to just send a note?{' '}
-          <a href="#quote" className="ink-underline font-medium text-cream">
-            Use the quick form instead
-          </a>
-          .
-        </p>
       </div>
     </section>
   )

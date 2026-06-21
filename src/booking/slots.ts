@@ -19,6 +19,15 @@ export interface Booking {
   endISO: string
   name: string
   email: string
+  // ── lead qualification (captured by the calendar form; folded in from the old quote form).
+  //    Optional so the lighter Remi chat flow, which doesn't ask these, still type-checks. ──
+  businessName?: string
+  phone?: string
+  website?: string
+  town?: string
+  /** What they're looking for — one or more lookingForOptions and/or their "Other" text. */
+  lookingFor?: string
+  budget?: string
   message: string
   createdISO: string
 }

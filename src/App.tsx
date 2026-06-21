@@ -6,7 +6,6 @@ import VoiceBand from './components/VoiceBand'
 import ProcessBand from './components/ProcessBand'
 import FAQ from './components/FAQ'
 import Booking from './components/Booking'
-import QuoteForm from './components/QuoteForm'
 import Footer from './components/Footer'
 import LiveBooking from './components/LiveBooking'
 import WhatsAppButton from './components/WhatsAppButton'
@@ -34,7 +33,6 @@ function App() {
       <ProcessBand />
       <FAQ />
       <Booking />
-      <QuoteForm />
       <Footer />
       <WhatsAppButton />
     </div>

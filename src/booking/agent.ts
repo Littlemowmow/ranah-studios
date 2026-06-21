@@ -21,6 +21,7 @@ import {
   getBookings,
   makeBookingId,
 } from './slots'
+import { matchKnowledge } from './knowledge'
 
 export type ChipKind = 'send' | 'ics' | 'restart'
 
@@ -203,7 +204,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
       return {
         state: s,
         reply: [
-          `hi — i'm ${name}, the booking assistant for ${config.studioName}. tell me what you're after and i'll find you a time. a quick intro, or a full demo?`,
+          `hi — i'm ${name} from ${config.studioName}. ask me anything about what we do — ranking websites, the 24/7 AI receptionist, pricing — or i can book you a free call. want a quick intro, or a full demo?`,
         ],
         chips: config.services.map((x) =>
           chip(`${x.label} · ${x.blurb}`, x.id),
@@ -383,6 +384,22 @@ export function respond(
     }
     s.stage = nextStage(s)
     return present(s, config, now)
+  }
+
+  // ── knowledge intercept ─────────────────────────────────────────────────
+  // If the message is a question about Ranah (pricing, services, emergency,
+  // turnaround…), answer it from the baked-in knowledge base, then re-present
+  // the current step so the booking flow picks up exactly where it left off.
+  // Guarded against machine tokens so chips still drive the flow.
+  if (raw && !raw.startsWith('__') && !raw.startsWith('day:') && !raw.startsWith('time:')) {
+    const answer = matchKnowledge(raw)
+    if (answer) {
+      const p = present(s, config, now)
+      // At the very start, the answers already nudge toward booking — don't repeat the
+      // full greeting. Mid-booking, re-show the current question so the flow resumes.
+      const reprompt = state.stage === 'service' ? [] : p.reply
+      return { ...p, reply: [...answer, ...reprompt] }
+    }
   }
 
   // ── stage-driven free-text capture ──────────────────────────────────────

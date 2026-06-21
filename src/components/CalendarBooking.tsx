@@ -52,8 +52,39 @@ export default function CalendarBooking() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
+  // ── lead qualification (folded in from the old standalone quote form) ──
+  const [businessName, setBusinessName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [website, setWebsite] = useState('')
+  const [town, setTown] = useState('')
+  const [needs, setNeeds] = useState<string[]>([])
+  const [otherNeed, setOtherNeed] = useState('')
+  const [budget, setBudget] = useState('')
+  // Honeypot: bots fill hidden fields, humans never see this. Filled => silently drop.
+  const [trap, setTrap] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [booking, setBooking] = useState<Booking | null>(null)
+
+  const OTHER = 'Other'
+  function toggleNeed(opt: string) {
+    setNeeds((prev) => (prev.includes(opt) ? prev.filter((x) => x !== opt) : [...prev, opt]))
+  }
+  // Combined "looking for" string for storage + email.
+  const lookingFor = needs
+    .map((n) => (n === OTHER ? otherNeed.trim() : n))
+    .filter(Boolean)
+    .join(', ')
+  const otherOk = !needs.includes(OTHER) || otherNeed.trim().length > 0
+  const canSubmit =
+    !!slot &&
+    name.trim().length > 0 &&
+    businessName.trim().length > 0 &&
+    EMAIL_RE.test(email) &&
+    phone.trim().length >= 7 &&
+    needs.length > 0 &&
+    otherOk &&
+    budget.length > 0 &&
+    !submitting
 
   // Month navigation bounds: this month → the month holding the last bookable day.
   const today0 = startOfDay(now)
@@ -99,7 +130,8 @@ export default function CalendarBooking() {
 
   function confirm(e: FormEvent) {
     e.preventDefault()
-    if (!slot || !name.trim() || !EMAIL_RE.test(email)) return
+    if (trap) return // honeypot tripped — drop the bot silently
+    if (!canSubmit || !slot) return
     setSubmitting(true)
     const b: Booking = {
       id: makeBookingId(slot.startISO, email),
@@ -109,6 +141,12 @@ export default function CalendarBooking() {
       endISO: slot.endISO,
       name: name.trim(),
       email: email.trim(),
+      businessName: businessName.trim(),
+      phone: phone.trim(),
+      website: website.trim(),
+      town: town.trim(),
+      lookingFor,
+      budget,
       message: message.trim(),
       createdISO: new Date().toISOString(),
     }
@@ -126,11 +164,25 @@ export default function CalendarBooking() {
     setName('')
     setEmail('')
     setMessage('')
+    setBusinessName('')
+    setPhone('')
+    setWebsite('')
+    setTown('')
+    setNeeds([])
+    setOtherNeed('')
+    setBudget('')
     setBooking(null)
   }
 
   const inputCls =
     'focus-gold w-full rounded-[12px] border border-line-strong bg-ink-base px-4 py-3 text-sm text-cream placeholder-muted/60 outline-none transition'
+  const labelCls = 'mb-1.5 block text-xs font-medium text-cream'
+  const chipCls = (active: boolean) =>
+    `press-cta rounded-full border px-3.5 py-2 text-xs font-medium transition-colors ${
+      active
+        ? 'border-gold bg-gold/10 text-gold-soft'
+        : 'border-line-strong text-muted hover:text-cream'
+    }`
 
   return (
     <div className="mt-10 overflow-hidden rounded-[18px] border border-line bg-panel">
@@ -268,32 +320,107 @@ export default function CalendarBooking() {
             <span className="text-cream">{formatDayLong(selDate)}</span> at{' '}
             <span className="text-cream">{slot.label}</span>
           </p>
-          <div className="mt-5 space-y-3">
-            <input
-              className={inputCls}
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
-              autoComplete="name"
-            />
-            <input
-              className={inputCls}
-              required
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email for your invite"
-              autoComplete="email"
-            />
-            <textarea
-              className={`${inputCls} min-h-[88px] resize-y`}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Anything we should know? (optional)"
-            />
+          <p className="mt-1.5 text-xs text-muted-soft">
+            A few details so we come prepared with something real for your business.
+          </p>
+
+          {/* Honeypot — visually hidden, off the tab order. Bots fill it; humans don't. */}
+          <input
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={trap}
+            onChange={(e) => setTrap(e.target.value)}
+            className="absolute left-[-9999px] h-0 w-0 opacity-0"
+            placeholder="Leave this empty"
+          />
+
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className={labelCls} htmlFor="bk-name">Your name</label>
+              <input id="bk-name" className={inputCls} required value={name}
+                onChange={(e) => setName(e.target.value)} placeholder="Jane Cooper" autoComplete="name" />
+            </div>
+            <div>
+              <label className={labelCls} htmlFor="bk-biz">Business name</label>
+              <input id="bk-biz" className={inputCls} required value={businessName}
+                onChange={(e) => setBusinessName(e.target.value)} placeholder="Cooper Family Dental" autoComplete="organization" />
+            </div>
+            <div>
+              <label className={labelCls} htmlFor="bk-email">Email for your invite</label>
+              <input id="bk-email" className={inputCls} required type="email" value={email}
+                onChange={(e) => setEmail(e.target.value)} placeholder="jane@business.com" autoComplete="email" />
+            </div>
+            <div>
+              <label className={labelCls} htmlFor="bk-phone">Phone</label>
+              <input id="bk-phone" className={inputCls} required type="tel" value={phone}
+                onChange={(e) => setPhone(e.target.value)} placeholder="(313) 555-0148" autoComplete="tel" />
+            </div>
+            <div>
+              <label className={labelCls} htmlFor="bk-web">
+                Website or social <span className="text-muted-soft">(optional)</span>
+              </label>
+              <input id="bk-web" className={inputCls} value={website}
+                onChange={(e) => setWebsite(e.target.value)} placeholder="yoursite.com or @handle" autoComplete="url" />
+            </div>
+            <div>
+              <label className={labelCls} htmlFor="bk-town">
+                Town / area <span className="text-muted-soft">(optional)</span>
+              </label>
+              <input id="bk-town" className={inputCls} value={town}
+                onChange={(e) => setTown(e.target.value)} placeholder="Ann Arbor, Ypsilanti…" />
+            </div>
           </div>
-          <div className="mt-5 flex items-center gap-3">
+
+          {/* What are you looking for — required, multi-select + Other */}
+          <fieldset className="mt-5">
+            <legend className={labelCls}>
+              What is your business looking for right now?{' '}
+              <span className="text-muted-soft">(pick all that apply)</span>
+            </legend>
+            <div className="flex flex-wrap gap-2">
+              {config.lookingForOptions.map((opt) => (
+                <button key={opt} type="button" onClick={() => toggleNeed(opt)}
+                  aria-pressed={needs.includes(opt)} className={chipCls(needs.includes(opt))}>
+                  {opt}
+                </button>
+              ))}
+              <button type="button" onClick={() => toggleNeed(OTHER)}
+                aria-pressed={needs.includes(OTHER)} className={chipCls(needs.includes(OTHER))}>
+                {OTHER}
+              </button>
+            </div>
+            {needs.includes(OTHER) && (
+              <input className={`${inputCls} mt-2.5`} value={otherNeed}
+                onChange={(e) => setOtherNeed(e.target.value)}
+                placeholder="Tell us what you need…" autoFocus />
+            )}
+          </fieldset>
+
+          {/* Budget — required, single-select */}
+          <fieldset className="mt-5">
+            <legend className={labelCls}>Rough budget</legend>
+            <div className="flex flex-wrap gap-2">
+              {config.budgetOptions.map((b) => (
+                <button key={b} type="button" onClick={() => setBudget(b)}
+                  aria-pressed={budget === b} className={chipCls(budget === b)}>
+                  {b}
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <div className="mt-5">
+            <label className={labelCls} htmlFor="bk-msg">
+              Anything else <span className="text-muted-soft">(optional)</span>
+            </label>
+            <textarea id="bk-msg" className={`${inputCls} min-h-[88px] resize-y`} value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="What's the biggest gap right now — being found on Google, missed calls, both?" />
+          </div>
+
+          <div className="mt-6 flex items-center gap-3">
             <button
               type="button"
               onClick={() => setStage('pick')}
@@ -303,7 +430,7 @@ export default function CalendarBooking() {
             </button>
             <button
               type="submit"
-              disabled={!name.trim() || !EMAIL_RE.test(email) || submitting}
+              disabled={!canSubmit}
               className="press-cta flex-1 rounded-full bg-cream py-3.5 text-sm font-medium text-ink-base transition-colors hover:bg-fg disabled:opacity-40"
             >
               {submitting ? 'Booking…' : 'Confirm booking'}

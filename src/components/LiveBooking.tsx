@@ -26,6 +26,13 @@ const fullDay = (d: Date) =>
 const fmtTime = (iso: string) =>
   new Date(iso).toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })
 
+// Turn a raw booking UID (e.g. "ojKpEUFz1W753vsA3dAeXb") into a clean, human confirmation
+// code (e.g. "OJKP-EUFZ") so the success screen reads as intentional, not like leaked noise.
+const fmtRef = (uid: string): string => {
+  const clean = uid.replace(/[^a-zA-Z0-9]/g, '').toUpperCase().slice(0, 8)
+  return clean.length > 4 ? `${clean.slice(0, 4)}-${clean.slice(4)}` : clean
+}
+
 async function api<T>(path: string, body: unknown): Promise<T> {
   const r = await fetch(path, {
     method: 'POST',
@@ -230,7 +237,13 @@ export default function LiveBooking() {
                 {fullDay(date)} · {fmtTime(slotIso)}
               </p>
               <p className="mt-1 text-sm text-muted">Confirmation sent to {email}</p>
-              <p className="mt-1 text-sm text-muted">Ref {ref}</p>
+              {ref && (
+                <div className="mt-3 flex justify-center">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-line bg-ink-base px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted-soft">
+                    <span className="text-muted-soft/70">Confirmation</span> {fmtRef(ref)}
+                  </span>
+                </div>
+              )}
               <button
                 onClick={() => {
                   setStep('when')

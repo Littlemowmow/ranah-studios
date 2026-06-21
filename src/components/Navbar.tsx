@@ -6,11 +6,11 @@ const NAV_LINKS = [
   { label: 'Voice AI', href: '#voice' },
   { label: 'Process', href: '#process' },
   { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#quote' },
+  { label: 'Contact', href: '#book' },
 ]
 
 // section ids tracked by scroll-spy (order matters for the observer)
-const SPY_IDS = ['services', 'voice', 'process', 'faq', 'quote']
+const SPY_IDS = ['services', 'voice', 'process', 'faq', 'book']
 
 function Wordmark({ className = '' }: { className?: string }) {
   return (
