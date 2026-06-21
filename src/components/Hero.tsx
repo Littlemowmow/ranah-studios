@@ -34,9 +34,15 @@ export default function Hero() {
   }, [])
 
   return (
+    // Cinematic gradient fallback so the hero never reads as a dead black box
+    // when the background video cannot autoplay (mobile data saver / Low Power).
     <section
       id="top"
       className="relative min-h-screen w-full overflow-hidden bg-navy"
+      style={{
+        background:
+          'radial-gradient(130% 85% at 50% 0%, #0a4256 0%, #04222F 48%, #03161E 100%)',
+      }}
     >
       {/* Fullscreen background video, navy base shows in any letterbox */}
       <video

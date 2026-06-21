@@ -15,7 +15,11 @@ const SPY_IDS = ['services', 'voice', 'process', 'faq', 'quote']
 function Wordmark({ className = '' }: { className?: string }) {
   return (
     <a href="#top" className={`inline-flex items-center ${className}`} aria-label="Ranah Studios">
-      <img src="/ranah-logo.png" alt="Ranah Studios" className="h-8 w-auto sm:h-9" />
+      <img
+        src={`${import.meta.env.BASE_URL}ranah-logo.png`}
+        alt="Ranah Studios"
+        className="h-8 w-auto sm:h-9"
+      />
     </a>
   )
 }

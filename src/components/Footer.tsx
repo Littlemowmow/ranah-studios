@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-6 py-20 text-center sm:px-8 sm:py-24">
         <a href="#top" aria-label="Ranah Studios">
           <img
-            src="/ranah-logo.png"
+            src={`${import.meta.env.BASE_URL}ranah-logo.png`}
             alt="Ranah Studios"
             className="h-16 w-auto opacity-95 sm:h-20"
           />
