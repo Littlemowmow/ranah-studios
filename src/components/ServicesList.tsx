@@ -50,7 +50,7 @@ const TIERS: Tier[] = [
     features: [
       'Hosting, edits, backups',
       'Uptime monitoring',
-      'Search Console checks',
+      'Search ranking checks',
       'Priority support',
     ],
   },

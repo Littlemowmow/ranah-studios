@@ -49,7 +49,7 @@ export default function VoiceBand() {
               <strong className="font-medium text-cream">Every inbound call</strong> gets picked up, never
               voicemail. It greets callers in your brand, discloses up front that it&rsquo;s an
               automated assistant, <strong className="font-medium text-cream">books appointments</strong> into
-              your calendar, answers hours/services/location strictly from your knowledge base,
+              your calendar, answers hours, services, and location strictly from your own details,
               and instantly transfers to a real person the moment someone asks.
             </p>
 
@@ -87,7 +87,7 @@ export default function VoiceBand() {
               </ul>
 
               <p className="mt-8 font-mono text-xs uppercase tracking-[0.14em] text-muted">
-                Built on · Vapi · GPT-4o · Deepgram nova-2 · Twilio · Calendly
+                Always on · answers in your name · books the appointment
               </p>
 
               <a

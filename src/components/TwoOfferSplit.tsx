@@ -60,7 +60,7 @@ export default function TwoOfferSplit() {
               An <strong className="font-medium text-cream">AI-powered assistant</strong> that answers every{' '}
               <strong className="font-medium text-cream">inbound call</strong> around the clock,{' '}
               <strong className="font-medium text-cream">books appointments</strong> into your calendar, answers
-              hours/services from your knowledge base, and hands off to a human
+              hours and services from your own details, and hands off to a human
               the moment a caller asks.
             </p>
             <a

@@ -3,38 +3,28 @@ import { useReveal } from '../hooks/useReveal'
 const STEPS = [
   {
     n: '01',
-    title: 'Find',
-    desc: 'A free lead engine scans the local market and scores real gaps (no site, phone-only, no booking).',
+    title: 'Your demo, first',
+    desc: 'A bespoke, on-brand site and a receptionist tuned to your business — built and live before you pay a cent.',
   },
   {
     n: '02',
-    title: 'Build the demo first',
-    desc: 'A bespoke, on-brand site + a tailored receptionist config, before any sales call.',
+    title: 'See it on your phone',
+    desc: 'Open the real demo link, click around, hear the receptionist answer. No pitch, no pressure.',
   },
   {
     n: '03',
-    title: 'Reach out',
-    desc: 'Always leading with the live demo link, never a pitch. One-to-one, the first 30 days.',
+    title: 'Your website goes live',
+    desc: 'Your domain, a build made to rank on Google, and your Google Business Profile — live and easy to find.',
   },
   {
     n: '04',
-    title: 'Close',
-    desc: 'A 10–30 min consult: open the demo on your phone, name the cost of missed after-hours calls, quote the path.',
+    title: 'Your receptionist goes live',
+    desc: 'A 24/7 line that answers in your name, books the appointment, and never drops a call to voicemail.',
   },
   {
     n: '05',
-    title: 'Deliver the website',
-    desc: 'Domain, ranking build, GA4 + Search Console + Google Business Profile, live and indexable.',
-  },
-  {
-    n: '06',
-    title: 'Deliver the receptionist',
-    desc: 'Fill the knowledge base, provision Twilio + Vapi, set transfer line + Calendly, test the full flow.',
-  },
-  {
-    n: '07',
-    title: 'Prove & retain',
-    desc: 'Monthly reports on calls handled, bookings made, traffic. Data earns the next sale.',
+    title: 'We prove it, monthly',
+    desc: 'Clear reports on calls handled, bookings made, and traffic won. The results earn the next month.',
   },
 ]
 

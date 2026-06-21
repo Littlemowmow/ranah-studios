@@ -51,7 +51,7 @@ export default function LiveBooking() {
   const [submitting, setSubmitting] = useState(false)
   const [err, setErr] = useState('')
   const [ref, setRef] = useState('')
-  const [mode, setMode] = useState('connecting…')
+  const [mode, setMode] = useState('')
 
   const days = useMemo(() => nextDays(10), [])
 
@@ -62,7 +62,7 @@ export default function LiveBooking() {
     api<{ slots: string[]; mode: string }>('/api/availability', { date: ymd(date), timeZone: TZ })
       .then((r) => {
         if (cancelled) return
-        setMode(r.mode === 'mock' ? 'Preview mode' : 'Real-time availability')
+        setMode('')
         // On first load, skip closed/empty days and land on the next open one.
         const idx = days.findIndex((d) => ymd(d) === ymd(date))
         if (r.slots.length === 0 && !userPicked && idx >= 0 && idx < days.length - 1) {
@@ -248,9 +248,11 @@ export default function LiveBooking() {
           )}
         </div>
 
-        <div className="border-t border-line px-7 py-3 text-center font-mono text-[10px] uppercase tracking-wide text-muted-soft">
-          {mode}
-        </div>
+        {mode && (
+          <div className="border-t border-line px-7 py-3 text-center font-mono text-[10px] uppercase tracking-wide text-muted-soft">
+            {mode}
+          </div>
+        )}
       </div>
     </div>
   )

@@ -29,7 +29,7 @@ const FAQS = [
   },
   {
     q: 'Can you guarantee more customers?',
-    a: 'We promise the mechanism, not a number we can’t control: we make you found and show you the exact Search Console numbers monthly. Not seeing more inbound in 90 days? We keep optimizing free.',
+    a: 'We promise the mechanism, not a number we can’t control: we make you found and show you the exact search ranking numbers monthly. Not seeing more inbound in 90 days? We keep optimizing free.',
   },
   {
     q: 'How fast can I be live?',
