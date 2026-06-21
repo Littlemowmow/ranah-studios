@@ -238,17 +238,6 @@ export default function QuoteForm() {
             )}
           </form>
         )}
-
-        <p className="mt-8 text-sm text-muted">
-          We only take a handful of clients at a time. Inbound only,
-          compliance-first. &middot; or email{' '}
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="ink-underline font-medium text-cream"
-          >
-            {CONTACT_EMAIL}
-          </a>
-        </p>
       </div>
     </section>
   )
