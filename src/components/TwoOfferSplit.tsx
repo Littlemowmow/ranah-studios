@@ -23,12 +23,13 @@ export default function TwoOfferSplit() {
               className="mt-4 font-display font-normal text-cream"
               style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', lineHeight: 1.02 }}
             >
-              Websites that <em className="italic text-fg">rank</em>
+              Websites that <strong className="font-semibold text-fg">rank</strong>
             </h3>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
-              Fast, mobile-friendly, on-brand sites on your own domain, built
-              as a real ranking search build (silo + schema + local-area pages +
-              Google Business Profile), not just a pretty page.
+              Fast, mobile-friendly, on-brand sites on your own domain, built as
+              a real <strong className="font-medium text-cream">ranking search build</strong> (silo + schema +{' '}
+              <strong className="font-medium text-cream">local-area pages</strong> +{' '}
+              <strong className="font-medium text-cream">Google Business Profile</strong>), not just a pretty page.
             </p>
             <a
               href="#services"
@@ -53,11 +54,12 @@ export default function TwoOfferSplit() {
               className="mt-4 font-display font-normal text-cream"
               style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', lineHeight: 1.02 }}
             >
-              A 24/7 AI <em className="italic text-fg">receptionist</em>
+              A <strong className="font-semibold text-fg">24/7 AI receptionist</strong>
             </h3>
             <p className="mt-4 max-w-md text-base leading-relaxed text-muted">
-              A Vapi-powered assistant that answers every inbound call around the
-              clock, books appointments into your calendar, answers
+              An <strong className="font-medium text-cream">AI-powered assistant</strong> that answers every{' '}
+              <strong className="font-medium text-cream">inbound call</strong> around the clock,{' '}
+              <strong className="font-medium text-cream">books appointments</strong> into your calendar, answers
               hours/services from your knowledge base, and hands off to a human
               the moment a caller asks.
             </p>

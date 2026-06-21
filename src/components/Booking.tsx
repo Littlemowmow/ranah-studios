@@ -9,7 +9,9 @@ import {
 } from '../booking/agent'
 import { type Booking, saveBooking } from '../booking/slots'
 import { downloadICS } from '../booking/ics'
+import { notifyOwner } from '../booking/notify'
 import { prefersReducedMotion } from '../hooks/useReveal'
+import CalendarBooking from './CalendarBooking'
 
 interface Msg {
   id: number
@@ -33,35 +35,12 @@ function buildSeed(): {
   }
 }
 
-// Best-effort owner notification. Until a Web3Forms key is set the booking
-// still saves locally + downloads an .ics; only the email is skipped.
-async function notifyOwner(b: Booking): Promise<void> {
-  const key = bookingConfig.web3FormsAccessKey
-  if (!key || key === 'YOUR_ACCESS_KEY_HERE') return
-  const start = new Date(b.startISO)
-  try {
-    await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({
-        access_key: key,
-        subject: `New booking — ${b.serviceLabel} with ${b.name}`,
-        from_name: `${bookingConfig.studioName} booking`,
-        name: b.name,
-        email: b.email,
-        service: b.serviceLabel,
-        when: `${start.toLocaleString()} (${bookingConfig.timezoneLabel})`,
-        message: b.message || '-',
-      }),
-    })
-  } catch {
-    /* best effort — the local save + .ics are the source of truth */
-  }
-}
-
 export default function Booking() {
   const seed = useRef<ReturnType<typeof buildSeed> | null>(null)
   if (!seed.current) seed.current = buildSeed()
+
+  // Calendly-style calendar is the default; Remi chat is one tap away.
+  const [mode, setMode] = useState<'calendar' | 'chat'>('calendar')
 
   const [messages, setMessages] = useState<Msg[]>(seed.current.messages)
   const [chips, setChips] = useState<Chip[]>(seed.current.chips)
@@ -145,7 +124,7 @@ export default function Booking() {
 
   return (
     <section id="book" className="bg-ink-base py-24 sm:py-28 lg:py-32">
-      <div className="mx-auto w-full max-w-2xl px-6">
+      <div className="mx-auto w-full max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-gold-soft">
             Book a demo
@@ -158,17 +137,42 @@ export default function Booking() {
               letterSpacing: '-0.02em',
             }}
           >
-            Tell {bookingConfig.assistantName} what you need.{' '}
-            <em className="italic text-fg">Pick a time.</em>
+            Book your <em className="italic text-fg">demo</em>.
           </h2>
           <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted">
-            A real back-and-forth, not a form. Say what you&rsquo;re after and
-            grab a 15 or 30-minute slot in seconds.
+            Pick a time on the calendar, or chat it out with{' '}
+            {bookingConfig.assistantName} &mdash; a 15 or 30-minute slot, booked
+            in seconds.
           </p>
         </div>
 
-        {/* Chat panel */}
-        <div className="mt-12 overflow-hidden rounded-[18px] border border-line bg-panel">
+        {/* Mode toggle: Calendly-style calendar vs Remi chat */}
+        <div className="mt-9 flex justify-center">
+          <div className="inline-flex rounded-full border border-line bg-panel p-1">
+            {(
+              [
+                ['calendar', 'Pick a time'],
+                ['chat', `Chat with ${bookingConfig.assistantName}`],
+              ] as const
+            ).map(([m, label]) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => setMode(m)}
+                className={`press-cta rounded-full px-5 py-2 text-sm font-medium transition-colors ${
+                  mode === m ? 'bg-cream text-ink-base' : 'text-muted hover:text-cream'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {mode === 'calendar' && <CalendarBooking />}
+
+        {mode === 'chat' && (
+        <div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-[18px] border border-line bg-panel">
           {/* Identity strip */}
           <div className="flex items-center gap-2.5 border-b border-line px-5 py-3.5">
             <span className="relative flex h-2.5 w-2.5">
@@ -277,6 +281,7 @@ export default function Booking() {
             </button>
           </form>
         </div>
+        )}
 
         <p className="mt-8 text-center text-sm text-muted">
           Prefer to just send a note?{' '}

@@ -43,13 +43,13 @@ export default function VoiceBand() {
               style={{ fontSize: 'clamp(2rem, 5vw, 3.75rem)', lineHeight: 0.98, letterSpacing: '-0.03em' }}
             >
               While you&rsquo;re closed, it{' '}
-              <em className="italic text-fg">still answers</em>.
+              <strong className="font-semibold text-fg">still answers</strong>.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted">
-              Every inbound call gets picked up, never voicemail. It greets
-              callers in your brand, discloses up front that it&rsquo;s an
-              automated assistant, books appointments into your Calendly,
-              answers hours/services/location strictly from your knowledge base,
+              <strong className="font-medium text-cream">Every inbound call</strong> gets picked up, never
+              voicemail. It greets callers in your brand, discloses up front that it&rsquo;s an
+              automated assistant, <strong className="font-medium text-cream">books appointments</strong> into
+              your calendar, answers hours/services/location strictly from your knowledge base,
               and instantly transfers to a real person the moment someone asks.
             </p>
 

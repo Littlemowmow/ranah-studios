@@ -37,6 +37,15 @@ export interface BookingConfig {
   web3FormsAccessKey: string
   /** Display label for the operating timezone, e.g. 'Eastern Time (ET)'. */
   timezoneLabel: string
+  /**
+   * WhatsApp number for the floating "chat with our AI" button, digits only in
+   * E.164 WITHOUT the leading '+' (e.g. '15551234567'). This is the number the
+   * WhatsApp agent (products/whatsapp-agent) answers on — paste the Meta Cloud
+   * API test number here after setup. Leave '' to hide the button.
+   */
+  whatsAppNumber: string
+  /** Pre-filled first message when a visitor taps the WhatsApp button. */
+  whatsAppPrefill: string
   services: Service[]
   weeklyHours: WeeklyHours
   /** Spacing of candidate start times, minutes. */
@@ -58,6 +67,9 @@ export const bookingConfig: BookingConfig = {
   // ⤵ paste your Web3Forms access key here to receive booking emails.
   web3FormsAccessKey: 'YOUR_ACCESS_KEY_HERE',
   timezoneLabel: 'Eastern Time (ET)',
+  // ⤵ paste the WhatsApp agent's number (Meta Cloud API test number) here, digits only, no '+'.
+  whatsAppNumber: '',
+  whatsAppPrefill: "Hi Ranah Studios! I'd like to know more about your websites and AI agents.",
   services: [
     {
       id: 'intro',

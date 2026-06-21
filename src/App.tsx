@@ -9,6 +9,7 @@ import Booking from './components/Booking'
 import QuoteForm from './components/QuoteForm'
 import Footer from './components/Footer'
 import LiveBooking from './components/LiveBooking'
+import WhatsAppButton from './components/WhatsAppButton'
 
 function App() {
   // Live Cal.com booking widget, gated behind #test-booking so the public site is
@@ -35,6 +36,7 @@ function App() {
       <Booking />
       <QuoteForm />
       <Footer />
+      <WhatsAppButton />
     </div>
   )
 }
