@@ -72,15 +72,17 @@ export default function Hero() {
           <h1
             className="animate-fade-rise max-w-7xl font-display font-normal leading-[0.95] tracking-[-2.46px] text-cream text-5xl sm:text-7xl md:text-8xl"
           >
-            Websites worth finding,{' '}
+            <strong className="font-semibold text-cream">Websites</strong> worth finding,{' '}
             <em className="not-italic text-muted">
-              and a receptionist that never sleeps.
+              and a <strong className="font-semibold text-cream">receptionist</strong> that never sleeps.
             </em>
           </h1>
 
           <p className="animate-fade-rise-delay mt-8 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            A solo local studio for independent local businesses. A site
-            that actually ranks in Google, and a 24/7 AI receptionist that books
+            A solo local studio for independent{' '}
+            <strong className="font-semibold text-cream">local businesses</strong>. A site that
+            actually <strong className="font-semibold text-cream">ranks in Google</strong>, and a{' '}
+            <strong className="font-semibold text-cream">24/7 AI receptionist</strong> that books
             the call instead of dropping it to voicemail.
           </p>
 

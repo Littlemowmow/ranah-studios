@@ -4,8 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ["'Instrument Serif'", 'Georgia', 'serif'],
-        body: ["'Inter'", 'system-ui', 'sans-serif'],
+        display: ["'Newsreader'", 'Georgia', 'serif'],
+        body: ["'Geist'", 'system-ui', 'sans-serif'],
         mono: ["'IBM Plex Mono'", 'ui-monospace', 'SFMono-Regular', 'monospace'],
       },
       colors: {

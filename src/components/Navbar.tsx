@@ -63,7 +63,7 @@ export default function Navbar() {
       <div
         className={`transition-colors duration-300 ${
           scrolled
-            ? 'liquid-glass border-b border-line'
+            ? 'nav-scrolled border-b border-line'
             : 'border-b border-transparent bg-transparent'
         }`}
       >

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ranah Studios — font directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Hanken+Grotesk:wght@400;500;600&family=Newsreader:ital,opsz@0,6..72;1,6..72&family=Geist:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B0B0C; --panel:#141416; --cream:#F2ECE0; --muted:#9A9A9F;
+    --gold:#C9A24B; --gold-soft:#E4CB86; --line:rgba(255,255,255,.10);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--cream);
+    font-family:'Hanken Grotesk',system-ui,sans-serif;padding:48px 24px 80px}
+  .wrap{max-width:920px;margin:0 auto}
+  .top{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:8px}
+  .lede{text-align:center;color:var(--muted);max-width:560px;margin:0 auto 48px;font-size:15px;line-height:1.6}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;
+    padding:40px 38px;margin-bottom:26px}
+  .tag{display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:22px}
+  .tag .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  h2{margin:0 0 16px;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.08;letter-spacing:-.01em}
+  p.body{margin:0 0 22px;color:#cfc9bd;font-size:16px;line-height:1.65;max-width:60ch}
+  .btn{display:inline-block;background:var(--gold);color:var(--ink);font-weight:600;
+    padding:12px 22px;border-radius:999px;font-size:14px}
+  .why{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:13.5px;line-height:1.6}
+  .why b{color:var(--cream);font-weight:600}
+
+  /* ── Pairing A — Fraunces + Hanken Grotesk ── */
+  .A h2,.A .eyebrow~h2{font-family:'Fraunces',Georgia,serif}
+  .A h2{font-optical-sizing:auto;font-weight:600}
+  .A .body{font-family:'Hanken Grotesk',sans-serif}
+  /* ── Pairing B — Newsreader + Geist ── */
+  .B h2{font-family:'Newsreader',Georgia,serif;font-weight:400;letter-spacing:0}
+  .B .body{font-family:'Geist',system-ui,sans-serif}
+  /* ── Pairing C — Bricolage Grotesque + Inter Tight ── */
+  .C h2{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;letter-spacing:-.02em}
+  .C .body{font-family:'Inter Tight',system-ui,sans-serif}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="top">Ranah Studios · font directions</p>
+    <p class="lede">Same words, three type systems. Pick the one that feels like an elegant
+      marketing studio, not another AI landing page. Tell me “A”, “B”, or “C”.</p>
+
+    <!-- A -->
+    <div class="card A">
+      <div class="tag"><span class="dot"></span> Direction A · Fraunces + Hanken Grotesk · warm editorial</div>
+      <p class="eyebrow">Metro Detroit · Web &amp; Voice</p>
+      <h2>Websites that rank, and a receptionist that never sleeps.</h2>
+      <p class="body">A solo studio building local businesses a site that actually gets found,
+        plus a 24/7 AI voice agent that books the call instead of dropping it to voicemail.</p>
+      <span class="btn">Book a free demo</span>
+      <p class="why"><b>Why it fits:</b> Fraunces is a warm “old-style” serif with real character and
+        soft, expensive curves, used by premium-but-human brands. Reads elegant and crafted, not techy.
+        The most distinctive of the three.</p>
+    </div>
+
+    <!-- B -->
+    <div class="card B">
+      <div class="tag"><span class="dot"></span> Direction B · Newsreader + Geist · quiet luxury</div>
+      <p class="eyebrow">Metro Detroit · Web &amp; Voice</p>
+      <h2>Websites that rank, and a receptionist that never sleeps.</h2>
+      <p class="body">A solo studio building local businesses a site that actually gets found,
+        plus a 24/7 AI voice agent that books the call instead of dropping it to voicemail.</p>
+      <span class="btn">Book a free demo</span>
+      <p class="why"><b>Why it fits:</b> Newsreader is a refined editorial serif, calm and sophisticated,
+        the “not in your face” option. Geist keeps the body crisp and modern. Reads like a high-end
+        magazine masthead.</p>
+    </div>
+
+    <!-- C -->
+    <div class="card C">
+      <div class="tag"><span class="dot"></span> Direction C · Bricolage Grotesque + Inter Tight · modern studio</div>
+      <p class="eyebrow">Metro Detroit · Web &amp; Voice</p>
+      <h2>Websites that rank, and a receptionist that never sleeps.</h2>
+      <p class="body">A solo studio building local businesses a site that actually gets found,
+        plus a 24/7 AI voice agent that books the call instead of dropping it to voicemail.</p>
+      <span class="btn">Book a free demo</span>
+      <p class="why"><b>Why it fits:</b> Bricolage Grotesque is a characterful contemporary display sans,
+        confident and fresh without a serif. The design-studio direction, more bold than elegant.</p>
+    </div>
+  </div>
+</body>
+</html>
