@@ -14,8 +14,8 @@ const SPY_IDS = ['services', 'voice', 'process', 'faq', 'quote']
 
 function Wordmark({ className = '' }: { className?: string }) {
   return (
-    <a href="#top" className={`font-display tracking-tight text-cream ${className}`}>
-      Ranah <span className="text-gold">·</span> Studios
+    <a href="#top" className={`inline-flex items-center ${className}`} aria-label="Ranah Studios">
+      <img src="/ranah-logo.png" alt="Ranah Studios" className="h-8 w-auto sm:h-9" />
     </a>
   )
 }
@@ -87,7 +87,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#quote"
+              href="#book"
               className="liquid-glass press-cta rounded-full px-5 py-2.5 text-sm font-medium text-cream"
             >
               Book a free demo
@@ -154,7 +154,7 @@ export default function Navbar() {
           </div>
 
           <a
-            href="#quote"
+            href="#book"
             onClick={() => setOpen(false)}
             className="liquid-glass press-cta mt-8 flex w-full items-center justify-center rounded-full px-6 py-4 text-base font-medium text-cream"
           >

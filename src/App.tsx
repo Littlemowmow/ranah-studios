@@ -4,6 +4,7 @@ import ServicesList from './components/ServicesList'
 import VoiceBand from './components/VoiceBand'
 import ProcessBand from './components/ProcessBand'
 import FAQ from './components/FAQ'
+import Booking from './components/Booking'
 import QuoteForm from './components/QuoteForm'
 import Footer from './components/Footer'
 
@@ -16,6 +17,7 @@ function App() {
       <VoiceBand />
       <ProcessBand />
       <FAQ />
+      <Booking />
       <QuoteForm />
       <Footer />
     </div>

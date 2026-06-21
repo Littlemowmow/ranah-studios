@@ -5,8 +5,6 @@ import { prefersReducedMotion } from '../hooks/useReveal'
 const VIDEO_SRC =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4'
 
-const FADE = 0.5 // seconds
-
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
 
@@ -14,47 +12,24 @@ export default function Hero() {
     const video = videoRef.current
     if (!video) return
 
-    // Reduced-motion: show the video static (no looping crossfade).
+    // Native seamless loop (no end-of-clip fade-to-blank). One gentle fade-in.
     if (prefersReducedMotion()) {
       video.style.opacity = '1'
       void video.play().catch(() => {})
       return
     }
 
-    let rafId = 0
-    let resetTimer: number | undefined
-
-    const tick = () => {
-      const { currentTime, duration } = video
-      if (duration && !Number.isNaN(duration)) {
-        if (currentTime < FADE) {
-          video.style.opacity = String(currentTime / FADE)
-        } else if (currentTime > duration - FADE) {
-          video.style.opacity = String(Math.max(0, (duration - currentTime) / FADE))
-        } else {
-          video.style.opacity = '1'
-        }
-      }
-      rafId = requestAnimationFrame(tick)
+    video.style.transition = 'opacity 0.6s ease-out'
+    const reveal = () => {
+      video.style.opacity = '1'
     }
-
-    const handleEnded = () => {
-      video.style.opacity = '0'
-      resetTimer = window.setTimeout(() => {
-        video.currentTime = 0
-        void video.play()
-      }, 100)
-    }
-
-    video.style.opacity = '0'
-    video.addEventListener('ended', handleEnded)
-    rafId = requestAnimationFrame(tick)
-    void video.play()
+    video.addEventListener('canplay', reveal, { once: true })
+    const t = window.setTimeout(reveal, 500)
+    void video.play().catch(() => {})
 
     return () => {
-      cancelAnimationFrame(rafId)
-      if (resetTimer) window.clearTimeout(resetTimer)
-      video.removeEventListener('ended', handleEnded)
+      video.removeEventListener('canplay', reveal)
+      window.clearTimeout(t)
     }
   }, [])
 
@@ -71,7 +46,7 @@ export default function Hero() {
         src={VIDEO_SRC}
         autoPlay
         muted
-        loop={false}
+        loop
         playsInline
       />
 
@@ -124,7 +99,7 @@ export default function Hero() {
 
           <div className="animate-fade-rise-delay-2 mt-12 flex flex-col items-center gap-4 sm:flex-row sm:gap-5">
             <a
-              href="#quote"
+              href="#book"
               className="press-cta group inline-flex items-center gap-3 rounded-full bg-ink-base/95 py-2 pl-7 pr-2 text-base font-medium text-cream ring-1 ring-white/15 shadow-xl backdrop-blur-sm"
             >
               Book a free demo
