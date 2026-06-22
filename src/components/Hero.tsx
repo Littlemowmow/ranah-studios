@@ -1,9 +1,13 @@
 import { useEffect, useRef } from 'react'
 import Navbar from './Navbar'
 import { prefersReducedMotion } from '../hooks/useReveal'
+import heroVideo from '../assets/hero.mp4'
+import heroPoster from '../assets/hero-poster.jpg'
 
-const VIDEO_SRC =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4'
+// Self-hosted, web-optimized loop (1280w, ~0.5MB). The original CDN file was
+// 13.5MB and blocked first paint; this streams behind a poster so the hero
+// paints instantly and the video fades in once it can play.
+const VIDEO_SRC = heroVideo
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -50,6 +54,8 @@ export default function Hero() {
         className="absolute inset-0 z-0 h-full w-full object-cover"
         style={{ opacity: 0 }}
         src={VIDEO_SRC}
+        poster={heroPoster}
+        preload="auto"
         autoPlay
         muted
         loop
