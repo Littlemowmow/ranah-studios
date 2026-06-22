@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 .gstack/
 .vercel
+
+# single-file build output (committed copy lives in standalone/)
+dist-single
