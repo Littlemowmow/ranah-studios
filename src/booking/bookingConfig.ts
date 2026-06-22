@@ -77,8 +77,8 @@ export const bookingConfig: BookingConfig = {
   lookingForOptions: [
     'A website that ranks on Google',
     'A 24/7 AI receptionist',
-    'Both — website + receptionist',
-    'Not sure yet — need advice',
+    'Both (website + receptionist)',
+    'Not sure yet (need advice)',
   ],
   budgetOptions: ['Under $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000+', 'Not sure yet'],
   services: [

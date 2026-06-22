@@ -45,10 +45,6 @@ export default function TwoOfferSplit() {
               <p className="font-mono text-xs uppercase tracking-[0.16em] text-gold">
                 02
               </p>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-panel px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-gold-soft">
-                <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-gold" />
-                live · 24/7
-              </span>
             </div>
             <h3
               className="mt-4 font-display font-normal text-cream"

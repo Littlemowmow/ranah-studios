@@ -204,7 +204,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
       return {
         state: s,
         reply: [
-          `hi — i'm ${name} from ${config.studioName}. ask me anything about what we do — ranking websites, the 24/7 AI receptionist, pricing — or i can book you a free call. want a quick intro, or a full demo?`,
+          `hi, i'm ${name} from ${config.studioName}. ask me anything about what we do: ranking websites, the 24/7 AI receptionist, pricing, or i can book you a free call. want a quick intro, or a full demo?`,
         ],
         chips: config.services.map((x) =>
           chip(`${x.label} · ${x.blurb}`, x.id),
@@ -217,7 +217,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
         return {
           state: s,
           reply: [
-            `i'm fully booked for the next ${config.maxDaysAhead} days — email ${config.ownerEmail} and i'll open something up for you.`,
+            `i'm fully booked for the next ${config.maxDaysAhead} days. email ${config.ownerEmail} and i'll open something up for you.`,
           ],
           chips: [chip('Start over', '__restart__', 'restart')],
         }
@@ -225,7 +225,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
       return {
         state: s,
         reply: [
-          `great — a ${svc?.label.toLowerCase()}. which day suits you? (all times ${config.timezoneLabel})`,
+          `great, a ${svc?.label.toLowerCase()}. which day suits you? (all times ${config.timezoneLabel})`,
         ],
         chips: days.slice(0, 8).map((d) => chip(d.label, `day:${d.dateKey}`)),
       }
@@ -270,9 +270,9 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
       const list = filtered.length ? filtered : all
       const note =
         s.pendingHour != null
-          ? `that exact time's taken — here's what's free on ${formatDayLong(date)}:`
+          ? `that exact time's taken. here's what's free on ${formatDayLong(date)}:`
           : filtered.length
-            ? `here's ${formatDayLong(date)} — pick a time:`
+            ? `here's ${formatDayLong(date)}, pick a time:`
             : `no ${s.timePref} slots that day, but here's ${formatDayLong(date)}:`
       const cleared: BrainState = { ...s, pendingHour: undefined, pendingMinute: undefined }
       return {
@@ -289,7 +289,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
       const when = whenLabel(s)
       return {
         state: s,
-        reply: [`perfect — ${when}. who am i booking this for? (your name)`],
+        reply: [`perfect, ${when}. who am i booking this for? (your name)`],
         chips: [],
       }
     }
@@ -298,7 +298,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
       return {
         state: s,
         reply: [
-          `thanks${s.name ? `, ${firstName(s.name)}` : ''} — what's the best email for your calendar invite and confirmation?`,
+          `thanks${s.name ? `, ${firstName(s.name)}` : ''}. what's the best email for your calendar invite and confirmation?`,
         ],
         chips: [],
       }
@@ -307,7 +307,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
       return {
         state: s,
         reply: [
-          `got it. anything you'd like me to pass along before the call? (optional — e.g. "hey, i want a demo for my dental practice")`,
+          `got it. what's your business name? (optional, so we can take a look before the call)`,
         ],
         chips: [chip('Skip', '__skip__')],
       }
@@ -318,7 +318,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
         state: s,
         reply: [
           `here's your booking:`,
-          `${svc?.label} — ${when}\nfor ${s.name} · ${s.email}${s.message ? `\n“${s.message}”` : ''}`,
+          `${svc?.label}: ${when}\nfor ${s.name} · ${s.email}${s.message ? `\n“${s.message}”` : ''}`,
           `shall i lock it in?`,
         ],
         chips: [
@@ -432,7 +432,7 @@ export function respond(
         return {
           ...present(s, config, now),
           reply: [
-            `let's start with what you'd like — a quick intro or a full demo?`,
+            `let's start with what you'd like: a quick intro or a full demo?`,
           ],
         }
       }
@@ -452,7 +452,7 @@ export function respond(
         return {
           state: s,
           reply: [
-            `hmm, that doesn't look like an email — mind trying again? (e.g. jane@business.com)`,
+            `hmm, that doesn't look like an email. mind trying again? (e.g. jane@business.com)`,
           ],
           chips: [],
         }
@@ -521,7 +521,7 @@ function commit(s: BrainState, config: BookingConfig): BrainTurn {
     state: done,
     reply: [
       `you're booked, ${firstName(s.name!)} ✓`,
-      `${svc?.label} — ${whenLabel(s)}. i've emailed ${config.studioName} and you'll hear back to confirm. add it to your calendar below so it doesn't slip.`,
+      `${svc?.label}: ${whenLabel(s)}. i've emailed ${config.studioName} and you'll hear back to confirm. add it to your calendar below so it doesn't slip.`,
     ],
     chips: [
       chip('Add to calendar', '__ics__', 'ics'),

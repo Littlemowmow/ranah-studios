@@ -97,10 +97,6 @@ export default function ServicesList() {
             <br />
             <span className="text-cream">Then plain pricing.</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted">
-            No retainers, no surprises. One-time builds you own forever, with an
-            optional care plan when you want it hands-off.
-          </p>
         </div>
 
         {/* Tiers */}

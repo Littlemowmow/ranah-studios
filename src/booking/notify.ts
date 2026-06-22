@@ -14,7 +14,7 @@ export async function notifyOwner(b: Booking): Promise<void> {
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         access_key: key,
-        subject: `New booking — ${b.businessName || b.name} · ${b.serviceLabel}`,
+        subject: `New booking: ${b.businessName || b.name} · ${b.serviceLabel}`,
         from_name: `${bookingConfig.studioName} booking`,
         name: b.name,
         business: b.businessName || '-',

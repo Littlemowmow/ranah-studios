@@ -163,7 +163,7 @@ export default function LiveBooking() {
                   ))}
                 </div>
               ) : slots.length === 0 ? (
-                <p className="text-sm text-muted">No times left that day — try another date.</p>
+                <p className="text-sm text-muted">No times left that day. Try another date.</p>
               ) : (
                 <div className="grid grid-cols-3 gap-2">
                   {slots.map((iso) => {

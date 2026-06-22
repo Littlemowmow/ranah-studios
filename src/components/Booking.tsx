@@ -126,11 +126,8 @@ export default function Booking() {
     <section id="book" className="bg-ink-base py-24 sm:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-3xl px-6">
         <div className="text-center">
-          <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-gold-soft">
-            Book a demo
-          </p>
           <h2
-            className="mx-auto mt-5 max-w-xl font-display font-normal text-cream"
+            className="mx-auto max-w-xl font-display font-normal text-cream"
             style={{
               fontSize: 'clamp(2rem, 5vw, 3.4rem)',
               lineHeight: 1.0,

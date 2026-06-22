@@ -291,7 +291,7 @@ export default function CalendarBooking() {
                 Pick a highlighted day to see open times.
               </p>
             ) : slots.length === 0 ? (
-              <p className="text-sm text-muted">No times left that day — try another.</p>
+              <p className="text-sm text-muted">No times left that day. Try another.</p>
             ) : (
               <div className="flex max-h-[260px] flex-col gap-2 overflow-y-auto pr-1">
                 {slots.map((s) => (
@@ -417,7 +417,7 @@ export default function CalendarBooking() {
             </label>
             <textarea id="bk-msg" className={`${inputCls} min-h-[88px] resize-y`} value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="What's the biggest gap right now — being found on Google, missed calls, both?" />
+              placeholder="What's the biggest gap right now: being found on Google, missed calls, both?" />
           </div>
 
           <div className="mt-6 flex items-center gap-3">
