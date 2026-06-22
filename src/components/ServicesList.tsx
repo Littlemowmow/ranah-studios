@@ -137,12 +137,9 @@ function ProductCard({ p }: { p: Product }) {
 
       <p className="mt-5 text-sm leading-relaxed text-muted">{p.desc}</p>
 
-      <ul className={`mb-8 mt-7 space-y-3 ${p.featured ? 'sm:columns-2 sm:gap-x-8 sm:space-y-0' : ''}`}>
+      <ul className="mb-8 mt-7 space-y-3">
         {p.features.map((feat) => (
-          <li
-            key={feat}
-            className={`flex items-start gap-2.5 text-sm text-cream ${p.featured ? 'mb-3 break-inside-avoid' : ''}`}
-          >
+          <li key={feat} className="flex items-start gap-2.5 text-sm text-cream">
             <Check size={15} className="mt-0.5 shrink-0 text-gold" />
             <span>{feat}</span>
           </li>
@@ -175,14 +172,15 @@ export default function ServicesList() {
           </h2>
         </div>
 
-        {/* Bento: flagship Website card + stacked supporting products */}
-        <div className="mt-16 grid gap-4 md:grid-cols-2 md:items-stretch">
-          <ProductCard p={WEBSITE} />
-          <div className="grid gap-4">
-            {PRODUCTS.map((p) => (
-              <ProductCard key={p.name} p={p} />
-            ))}
-          </div>
+        {/* Staggered grid: left, right, left, right — the right column is offset
+            down so the cards interlock. items-start keeps each card its natural
+            height (no stretch), so the featured card never leaves a void. */}
+        <div className="mt-16 grid gap-6 md:grid-cols-2 md:items-start">
+          {[WEBSITE, ...PRODUCTS].map((p, i) => (
+            <div key={p.name} className={i % 2 === 1 ? 'md:mt-24' : ''}>
+              <ProductCard p={p} />
+            </div>
+          ))}
         </div>
 
         <p className="mx-auto mt-8 max-w-2xl text-center font-mono text-xs leading-relaxed tracking-[0.02em] text-muted">
