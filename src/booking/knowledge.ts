@@ -32,22 +32,29 @@ const KB: Entry[] = [
     // website pricing
     test: /\b(website|web ?site|site|web design|seo).*(price|pricing|cost|how much|charge)|\b(price|pricing|cost|how much|charge).*(website|web ?site|site)\b/,
     answer: [
-      'Websites: a basic one-page site is $500, a standard multi-section build is $1,000, and a full ranking SEO build runs $1,000–$2,500.',
-      'There’s an optional $100/mo care plan if you want it hands-off after launch.',
+      'Websites start at $750 for a one-page site and go up to $2,500 for a full custom build with ranking SEO (silo, schema, local-area pages, Google Business Profile aligned).',
+      'There’s an optional $250/mo care plan that keeps everything hands-off after launch.',
     ],
   },
   {
     // receptionist pricing
     test: /\b(receptionist|voice|phone|call).*(price|pricing|cost|how much|charge)|\b(price|pricing|cost|how much|charge).*(receptionist|voice|phone)\b/,
     answer: [
-      'The 24/7 AI receptionist is $3,000 setup + $500/mo. The per-minute phone cost (pennies a call) is billed straight through, and only switches on after your site is live.',
+      'The 24/7 AI receptionist is $4,000 setup + $500/mo. The per-minute phone cost (pennies a call) is billed straight through, and only switches on after your site is live.',
+    ],
+  },
+  {
+    // online ordering
+    test: /\b(online ordering|order online|ordering|pickup|delivery|takeout|take-?out|cart|checkout|pay online)\b/,
+    answer: [
+      'Online ordering lets your customers order and pay online for pickup or delivery, without tying up the phone. It runs around $4,000 to set up plus a small monthly fee.',
     ],
   },
   {
     // generic pricing fallback
     test: /\b(price|pricing|cost|costs|how much|charge|rates?|expensive|afford|budget)\b|\$/,
     answer: [
-      'Sites: one-page $500, multi-section $1,000, full ranking SEO build $1,000–$2,500. The 24/7 AI receptionist is $3,000 setup + $500/mo. Optional care plan $100/mo.',
+      'Websites run $750 to $2,500 depending on scope. The 24/7 AI receptionist is $4,000 setup + $500/mo. Online ordering is around $4,000 setup plus a small monthly fee. Optional care plan $250/mo.',
       'And the demo is free first. You only pay once you’ve seen it. Want a quick call to scope yours?',
     ],
   },

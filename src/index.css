@@ -104,38 +104,30 @@ body {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* ---- Liquid-glass surface (nav pill, scrolled nav, hero CTAs) ---- */
-.liquid-glass {
-  background: rgba(255, 255, 255, 0.01);
-  background-blend-mode: luminosity;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: none;
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+/* ---- Bubble button: solid, self-contained surface (every primary CTA) ----
+   No translucency / backdrop sampling, so it never goes flaky over the hero
+   video, the scrolled nav, or light content. Dark fill + top sheen + soft
+   lift = a confident "bubble" that reads the same on any background. */
+.btn-bubble {
+  background: linear-gradient(180deg, #1b1b1e 0%, #0e0e10 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 8px 22px rgba(0, 0, 0, 0.4);
   position: relative;
-  overflow: hidden;
 }
-.liquid-glass::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.45) 0%,
-    rgba(255, 255, 255, 0.15) 20%,
-    rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.15) 80%,
-    rgba(255, 255, 255, 0.45) 100%
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+.btn-bubble:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 10px 28px rgba(0, 0, 0, 0.48);
+}
+
+/* ---- Legibility shadow for text sitting over the hero video ----
+   Soft dark halo so words (and the gold numerals) keep contrast on any
+   frame, without darkening the whole scrim. Inherits to child spans. */
+.hero-legible {
+  text-shadow: 0 1px 14px rgba(3, 22, 31, 0.5);
 }
 
 /* ---- CTA press physics (dark - no orange) ---- */

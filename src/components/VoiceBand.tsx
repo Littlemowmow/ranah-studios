@@ -92,9 +92,12 @@ export default function VoiceBand() {
 
               <a
                 href="#book"
-                className="liquid-glass press-cta mt-10 inline-flex items-center gap-2 rounded-full px-9 py-4 text-base font-medium text-cream"
+                className="btn-bubble press-cta group mt-10 inline-flex items-center gap-3 rounded-full py-3 pl-8 pr-3 text-base font-medium text-cream"
               >
-                Hear it on your business <span className="cta-arrow">&rarr;</span>
+                Hear it on your business
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-cream text-ink-base">
+                  <span className="cta-arrow">&rarr;</span>
+                </span>
               </a>
             </div>
 

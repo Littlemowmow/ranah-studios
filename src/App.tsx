@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import Hero from './components/Hero'
 import TwoOfferSplit from './components/TwoOfferSplit'
 import ServicesList from './components/ServicesList'
-import VoiceBand from './components/VoiceBand'
 import ProcessBand from './components/ProcessBand'
 import FAQ from './components/FAQ'
 import Booking from './components/Booking'
@@ -31,7 +30,6 @@ function App() {
       <TwoOfferSplit />
       <ServicesList />
       <Booking />
-      <VoiceBand />
       <ProcessBand />
       <FAQ />
       <Footer />

@@ -67,11 +67,11 @@ export default function Navbar() {
             : 'border-b border-transparent bg-transparent'
         }`}
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8">
+        <nav className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8">
           <Wordmark className="text-2xl sm:text-3xl" />
 
-          {/* Desktop links */}
-          <div className="hidden items-center gap-7 lg:flex">
+          {/* Desktop links — centered to fill the bar */}
+          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-9 lg:flex">
             {NAV_LINKS.map((l) => (
               <a
                 key={l.label}
@@ -79,7 +79,7 @@ export default function Navbar() {
                 className={`relative text-sm transition-colors duration-200 ${
                   isActive(l.href)
                     ? 'text-fg'
-                    : 'text-muted hover:text-fg'
+                    : 'text-cream/75 hover:text-fg'
                 }`}
               >
                 {l.label}
@@ -90,13 +90,18 @@ export default function Navbar() {
                 />
               </a>
             ))}
-            <a
-              href="#book"
-              className="liquid-glass press-cta rounded-full px-5 py-2.5 text-sm font-medium text-cream"
-            >
-              Book a free demo
-            </a>
           </div>
+
+          {/* Desktop CTA — right */}
+          <a
+            href="#book"
+            className="btn-bubble press-cta group hidden items-center gap-2.5 rounded-full py-1.5 pl-5 pr-1.5 text-sm font-medium text-cream lg:inline-flex"
+          >
+            Book a free demo
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cream text-ink-base">
+              <span className="cta-arrow text-xs">&rarr;</span>
+            </span>
+          </a>
 
           {/* Mobile toggle */}
           <button
@@ -160,9 +165,12 @@ export default function Navbar() {
           <a
             href="#book"
             onClick={() => setOpen(false)}
-            className="liquid-glass press-cta mt-8 flex w-full items-center justify-center rounded-full px-6 py-4 text-base font-medium text-cream"
+            className="btn-bubble press-cta group mt-8 flex w-full items-center justify-center gap-3 rounded-full px-6 py-4 text-base font-medium text-cream"
           >
             Book a free demo
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cream text-ink-base">
+              <span className="cta-arrow">&rarr;</span>
+            </span>
           </a>
         </div>
       </div>

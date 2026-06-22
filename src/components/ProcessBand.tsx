@@ -4,7 +4,7 @@ const STEPS = [
   {
     n: '01',
     title: 'Your demo, first',
-    desc: 'A bespoke, on-brand site and a receptionist tuned to your business — built and live before you pay a cent.',
+    desc: 'A bespoke, on-brand site and a receptionist tuned to your business, built and live before you pay a cent.',
   },
   {
     n: '02',
@@ -14,7 +14,7 @@ const STEPS = [
   {
     n: '03',
     title: 'Your website goes live',
-    desc: 'Your domain, a build made to rank on Google, and your Google Business Profile — live and easy to find.',
+    desc: 'Your domain, a build made to rank on Google, and your Google Business Profile, live and easy to find.',
   },
   {
     n: '04',

@@ -188,7 +188,7 @@ export default function CalendarBooking() {
         setBookError(
           result.error
             ? `Couldn’t book that time: ${result.error}. Please pick another.`
-            : 'That time just became unavailable — please pick another.',
+            : 'That time just became unavailable. Please pick another.',
         )
         setSubmitting(false)
         return
