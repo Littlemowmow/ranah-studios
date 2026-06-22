@@ -29,10 +29,10 @@ function App() {
       <Hero />
       <TwoOfferSplit />
       <ServicesList />
+      <Booking />
       <VoiceBand />
       <ProcessBand />
       <FAQ />
-      <Booking />
       <Footer />
       <WhatsAppButton />
     </div>

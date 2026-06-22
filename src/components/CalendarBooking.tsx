@@ -1,7 +1,7 @@
 // Calendly-style booking: service → month calendar → time list → details.
 // Runs entirely on the LOCAL slot engine (slots.ts) so it works on the static
 // deploy with no backend. Mirrors the chat flow's persistence + .ics + email.
-import { useMemo, useState, type FormEvent } from 'react'
+import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { bookingConfig } from '../booking/bookingConfig'
 import {
   type Booking,
@@ -16,6 +16,7 @@ import {
 } from '../booking/slots'
 import { downloadICS } from '../booking/ics'
 import { notifyOwner } from '../booking/notify'
+import { bookViaEngine, engineEnabled, fetchEngineSlots } from '../booking/engine'
 
 const WEEKDAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -64,6 +65,12 @@ export default function CalendarBooking() {
   const [trap, setTrap] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [booking, setBooking] = useState<Booking | null>(null)
+  // ── live booking-engine (Cal.com → Google Calendar) — only when configured ──
+  const useEngine = engineEnabled()
+  const [engineSlots, setEngineSlots] = useState<SlotOption[] | null>(null)
+  const [loadingSlots, setLoadingSlots] = useState(false)
+  const [slotError, setSlotError] = useState<string | null>(null)
+  const [bookError, setBookError] = useState<string | null>(null)
 
   const OTHER = 'Other'
   function toggleNeed(opt: string) {
@@ -122,17 +129,41 @@ export default function CalendarBooking() {
     year: 'numeric',
   })
   const selDate = selKey ? dateFromKey(selKey) : null
-  const slots =
+  const service = config.services.find((s) => s.id === serviceId)
+  const serviceLabel = service?.label ?? ''
+  const localSlots =
     selDate && isBookable(selDate)
       ? generateDaySlots(selDate, serviceId, config, getBookings(), now)
       : []
-  const serviceLabel = config.services.find((s) => s.id === serviceId)?.label ?? ''
+  // In engine mode the calendar still gates clickable days by studio hours
+  // (isBookable), but the authoritative open times come from Cal.com on select.
+  const slots = useEngine ? (engineSlots ?? []) : localSlots
 
-  function confirm(e: FormEvent) {
+  // Fetch real availability when a day is picked (engine mode only).
+  useEffect(() => {
+    if (!useEngine) return
+    if (!selKey || !selDate || !service || !isBookable(selDate)) {
+      setEngineSlots(null)
+      return
+    }
+    let cancelled = false
+    setLoadingSlots(true)
+    setSlotError(null)
+    setEngineSlots(null)
+    fetchEngineSlots(selKey, service.minutes)
+      .then((s) => { if (!cancelled) setEngineSlots(s) })
+      .catch((e) => { if (!cancelled) setSlotError(String((e as Error)?.message || e)) })
+      .finally(() => { if (!cancelled) setLoadingSlots(false) })
+    return () => { cancelled = true }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [useEngine, selKey, serviceId])
+
+  async function confirm(e: FormEvent) {
     e.preventDefault()
     if (trap) return // honeypot tripped — drop the bot silently
     if (!canSubmit || !slot) return
     setSubmitting(true)
+    setBookError(null)
     const b: Booking = {
       id: makeBookingId(slot.startISO, email),
       serviceId,
@@ -150,8 +181,21 @@ export default function CalendarBooking() {
       message: message.trim(),
       createdISO: new Date().toISOString(),
     }
+    // Engine mode: create the real Cal.com booking first; only confirm on success.
+    if (useEngine) {
+      const result = await bookViaEngine(b)
+      if (!result.ok) {
+        setBookError(
+          result.error
+            ? `Couldn’t book that time: ${result.error}. Please pick another.`
+            : 'That time just became unavailable — please pick another.',
+        )
+        setSubmitting(false)
+        return
+      }
+    }
     saveBooking(b)
-    void notifyOwner(b)
+    void notifyOwner(b) // best-effort rich lead email to the owner (both modes)
     setBooking(b)
     setSubmitting(false)
     setStage('done')
@@ -172,6 +216,10 @@ export default function CalendarBooking() {
     setOtherNeed('')
     setBudget('')
     setBooking(null)
+    setEngineSlots(null)
+    setLoadingSlots(false)
+    setSlotError(null)
+    setBookError(null)
   }
 
   const inputCls =
@@ -289,6 +337,12 @@ export default function CalendarBooking() {
             {!selDate ? (
               <p className="text-sm text-muted">
                 Pick a highlighted day to see open times.
+              </p>
+            ) : useEngine && loadingSlots ? (
+              <p className="text-sm text-muted">Checking open times…</p>
+            ) : useEngine && slotError ? (
+              <p className="text-sm text-muted">
+                Couldn’t load times right now. Please try another day.
               </p>
             ) : slots.length === 0 ? (
               <p className="text-sm text-muted">No times left that day. Try another.</p>
@@ -419,6 +473,15 @@ export default function CalendarBooking() {
               onChange={(e) => setMessage(e.target.value)}
               placeholder="What's the biggest gap right now: being found on Google, missed calls, both?" />
           </div>
+
+          {bookError && (
+            <p
+              role="alert"
+              className="mt-5 rounded-[12px] border border-gold/40 bg-gold/10 px-4 py-3 text-sm text-gold-soft"
+            >
+              {bookError}
+            </p>
+          )}
 
           <div className="mt-6 flex items-center gap-3">
             <button

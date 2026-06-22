@@ -37,6 +37,15 @@ export interface BookingConfig {
   web3FormsAccessKey: string
   /** Display label for the operating timezone, e.g. 'Eastern Time (ET)'. */
   timezoneLabel: string
+  /** IANA timezone the booking engine / Cal.com computes slots in, e.g. 'America/Detroit'. */
+  ianaTimeZone: string
+  /**
+   * Deployed booking-engine base URL (products/booking-engine → Cal.com → Google
+   * Calendar), e.g. 'https://rana-booking.netlify.app'. Leave '' to keep the fully
+   * LOCAL slot engine + .ics flow (no backend). When set, the calendar fetches real
+   * availability and creates real bookings. See booking-engine/DEPLOY-NETLIFY.md.
+   */
+  bookingEngineUrl: string
   /**
    * WhatsApp number for the floating "chat with our AI" button, digits only in
    * E.164 WITHOUT the leading '+' (e.g. '15551234567'). This is the number the
@@ -71,6 +80,10 @@ export const bookingConfig: BookingConfig = {
   // ⤵ paste your Web3Forms access key here to receive booking emails.
   web3FormsAccessKey: 'YOUR_ACCESS_KEY_HERE',
   timezoneLabel: 'Eastern Time (ET)',
+  ianaTimeZone: 'America/Detroit',
+  // ⤵ paste the deployed booking-engine URL here to go live with Cal.com/Google Calendar.
+  //    Leave '' for the local-only slot engine + .ics fallback.
+  bookingEngineUrl: '',
   // ⤵ paste the WhatsApp agent's number (Meta Cloud API test number) here, digits only, no '+'.
   whatsAppNumber: '',
   whatsAppPrefill: "Hi Ranah Studios! I'd like to know more about your websites and AI agents.",
