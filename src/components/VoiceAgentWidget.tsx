@@ -19,6 +19,10 @@ export default function VoiceAgentWidget() {
       const el = document.createElement('elevenlabs-convai')
       el.id = 'ranah-voice-agent'
       el.setAttribute('agent-id', AGENT_ID)
+      // Start as a small collapsed launcher, not the large expanded "Need help?"
+      // card, which dominated the screen on mobile. Tap to open the call.
+      el.setAttribute('variant', 'compact')
+      el.setAttribute('default-expanded', 'false')
       document.body.appendChild(el)
     }
   }, [])

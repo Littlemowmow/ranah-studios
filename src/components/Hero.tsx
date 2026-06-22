@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Navbar from './Navbar'
 import { prefersReducedMotion } from '../hooks/useReveal'
 import heroVideo from '../assets/hero.mp4'
@@ -11,25 +11,29 @@ const VIDEO_SRC = heroVideo
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  // When autoplay is blocked (iOS Low Power Mode, data saver), the browser draws a
+  // play-button overlay on the <video>. Drop the video in that case and let the
+  // static poster show, so there's no dead "play" control sitting over the hero.
+  const [videoHidden, setVideoHidden] = useState(false)
 
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
-    // Native seamless loop (no end-of-clip fade-to-blank). One gentle fade-in.
-    if (prefersReducedMotion()) {
+    const reveal = () => {
       video.style.opacity = '1'
-      void video.play().catch(() => {})
+    }
+    const blocked = () => setVideoHidden(true)
+
+    if (prefersReducedMotion()) {
+      video.play().then(reveal).catch(blocked)
       return
     }
 
     video.style.transition = 'opacity 0.6s ease-out'
-    const reveal = () => {
-      video.style.opacity = '1'
-    }
     video.addEventListener('canplay', reveal, { once: true })
     const t = window.setTimeout(reveal, 500)
-    void video.play().catch(() => {})
+    video.play().then(reveal).catch(blocked)
 
     return () => {
       video.removeEventListener('canplay', reveal)
@@ -48,19 +52,27 @@ export default function Hero() {
           'radial-gradient(130% 85% at 50% 0%, #0a4256 0%, #04222F 48%, #03161E 100%)',
       }}
     >
-      {/* Fullscreen background video, navy base shows in any letterbox */}
-      <video
-        ref={videoRef}
+      {/* Static poster base, also the fallback when autoplay is blocked (no play overlay) */}
+      <img
+        src={heroPoster}
+        alt=""
+        aria-hidden="true"
         className="absolute inset-0 z-0 h-full w-full object-cover"
-        style={{ opacity: 0 }}
-        src={VIDEO_SRC}
-        poster={heroPoster}
-        preload="auto"
-        autoPlay
-        muted
-        loop
-        playsInline
       />
+      {/* Background video fades in over the poster; dropped entirely if autoplay is blocked */}
+      {!videoHidden && (
+        <video
+          ref={videoRef}
+          className="absolute inset-0 z-0 h-full w-full object-cover"
+          style={{ opacity: 0 }}
+          src={VIDEO_SRC}
+          preload="auto"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      )}
 
       {/* Subtle bottom vignette for headline legibility, no blobs/radials */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-navy/35 via-navy/25 to-navy/90" />
