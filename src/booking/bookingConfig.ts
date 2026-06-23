@@ -46,6 +46,9 @@ export interface BookingConfig {
    * availability and creates real bookings. See booking-engine/DEPLOY-NETLIFY.md.
    */
   bookingEngineUrl: string
+  /** Cal.com booking link (the part after cal.com/), e.g. 'username' or
+      'username/30min'. Powers the live Cal.com embed in the booking section. */
+  calLink: string
   /**
    * WhatsApp number for the floating "chat with our AI" button, digits only in
    * E.164 WITHOUT the leading '+' (e.g. '15551234567'). This is the number the
@@ -84,6 +87,8 @@ export const bookingConfig: BookingConfig = {
   // ⤵ paste the deployed booking-engine URL here to go live with Cal.com/Google Calendar.
   //    Leave '' for the local-only slot engine + .ics fallback.
   bookingEngineUrl: '',
+  // ⤵ Cal.com booking link (after cal.com/). Live availability + Google Calendar.
+  calLink: 'hadi-muhammad-ali-9x3e5f',
   // ⤵ paste the WhatsApp agent's number (Meta Cloud API test number) here, digits only, no '+'.
   whatsAppNumber: '',
   whatsAppPrefill: "Hi Ranah Studios! I'd like to know more about your websites and AI agents.",
