@@ -1,4 +1,4 @@
-import { Globe, PhoneCall, ShoppingBag, LifeBuoy, Check, ArrowRight } from 'lucide-react'
+import { Globe, PhoneCall, LifeBuoy, Check, ArrowRight } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { useReveal } from '../hooks/useReveal'
 
@@ -65,20 +65,6 @@ const PRODUCTS: Product[] = [
       'Books into your calendar',
       'Hands off to a human on request',
       'Inbound only, TCPA / SB 351 safe',
-    ],
-  },
-  {
-    name: 'Business ordering system',
-    icon: ShoppingBag,
-    price: '~$4,000',
-    unit: 'setup',
-    sub: '+ small monthly',
-    desc: 'Let customers order and pay online for pickup or delivery, without tying up the phone.',
-    features: [
-      'Branded ordering page',
-      'Pickup and delivery',
-      'Online payments',
-      'Menu and order management',
     ],
   },
   {
@@ -196,23 +182,16 @@ export default function ServicesList() {
           </h2>
         </div>
 
-        {/* Staggered grid: left, right, left, right — the right column is offset
-            down so the cards interlock. items-start keeps each card its natural
-            height (no stretch), so the featured card never leaves a void. */}
-        {/* Giga-style stagger: cards alternate left/right at ~half width and pull
-            UP to interlock, so the zigzag stays compact and airy instead of
-            cascading off the page. Mobile collapses to a full-width stack. */}
-        <div className="mt-16 flex flex-col gap-y-8 md:block">
-          {[WEBSITE, ...PRODUCTS].map((p, i) => (
-            <div
-              key={p.name}
-              className={`w-full md:w-[48%] ${i % 2 === 1 ? 'md:ml-auto' : ''} ${
-                i > 0 ? 'md:-mt-16' : ''
-              }`}
-            >
-              <ProductCard p={p} />
-            </div>
-          ))}
+        {/* Bento: flagship Website on the left, Voice receptionist + Care plan
+            stacked on the right. items-start keeps each its natural height (no
+            stretch = no void). Mobile collapses to a single-column stack. */}
+        <div className="mt-16 grid gap-6 md:grid-cols-2 md:items-start">
+          <ProductCard p={WEBSITE} />
+          <div className="grid gap-6">
+            {PRODUCTS.map((p) => (
+              <ProductCard key={p.name} p={p} />
+            ))}
+          </div>
         </div>
 
         <p className="mx-auto mt-12 max-w-2xl text-center font-mono text-xs leading-relaxed tracking-[0.02em] text-muted">
