@@ -138,8 +138,7 @@ export default function Booking() {
           </h2>
           <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-muted">
             Pick a time on the calendar, or chat it out with{' '}
-            {bookingConfig.assistantName} &mdash; a 15 or 30-minute slot, booked
-            in seconds.
+            {bookingConfig.assistantName}. A free 30-minute demo, booked in seconds.
           </p>
         </div>
 

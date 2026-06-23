@@ -4,6 +4,7 @@ import TrustStrip from './components/TrustStrip'
 import TwoOfferSplit from './components/TwoOfferSplit'
 import ServicesList from './components/ServicesList'
 import ProcessBand from './components/ProcessBand'
+import Results from './components/Results'
 import FAQ from './components/FAQ'
 import Booking from './components/Booking'
 import Footer from './components/Footer'
@@ -34,6 +35,7 @@ function App() {
       <ServicesList />
       <Booking />
       <ProcessBand />
+      <Results />
       <FAQ />
       <Footer />
       <WhatsAppButton />

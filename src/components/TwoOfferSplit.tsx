@@ -122,12 +122,6 @@ export default function TwoOfferSplit() {
           </div>
         </div>
 
-        <p
-          className="mt-20 font-display font-normal text-cream sm:mt-24"
-          style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', lineHeight: 1.05 }}
-        >
-          <em className="italic text-fg">One person</em>, sketch to launch.
-        </p>
       </div>
     </section>
   )

@@ -96,12 +96,6 @@ export const bookingConfig: BookingConfig = {
   budgetOptions: ['Under $1,000', '$1,000 – $3,000', '$3,000 – $5,000', '$5,000+', 'Not sure yet'],
   services: [
     {
-      id: 'intro',
-      label: '15-min intro',
-      minutes: 15,
-      blurb: 'A quick hello to see if we are a fit.',
-    },
-    {
       id: 'demo',
       label: '30-min demo',
       minutes: 30,

@@ -27,6 +27,9 @@ export default function TrustStrip() {
             </div>
           ))}
         </div>
+        <p className="mt-6 text-center font-mono text-[12px] uppercase tracking-[0.18em] text-gold-soft">
+          + more
+        </p>
       </div>
     </section>
   )

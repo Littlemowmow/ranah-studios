@@ -29,33 +29,11 @@ const KB: Entry[] = [
     ],
   },
   {
-    // website pricing
-    test: /\b(website|web ?site|site|web design|seo).*(price|pricing|cost|how much|charge)|\b(price|pricing|cost|how much|charge).*(website|web ?site|site)\b/,
+    // pricing — Remi never quotes numbers; scope on a call, demo is free
+    test: /\b(price|pricing|cost|costs|how much|charge|rates?|expensive|afford|budget|quote)\b|\$/,
     answer: [
-      'Websites start at $750 for a one-page site and go up to $2,500 for a full custom build with ranking SEO (silo, schema, local-area pages, Google Business Profile aligned).',
-      'There’s an optional $600/mo care plan that keeps everything hands-off after launch.',
-    ],
-  },
-  {
-    // receptionist pricing
-    test: /\b(receptionist|voice|phone|call).*(price|pricing|cost|how much|charge)|\b(price|pricing|cost|how much|charge).*(receptionist|voice|phone)\b/,
-    answer: [
-      'The 24/7 AI receptionist is $4,000 setup + $500/mo. The per-minute phone cost (pennies a call) is billed straight through, and only switches on after your site is live.',
-    ],
-  },
-  {
-    // online ordering
-    test: /\b(online ordering|order online|ordering|pickup|delivery|takeout|take-?out|cart|checkout|pay online)\b/,
-    answer: [
-      'Online ordering lets your customers order and pay online for pickup or delivery, without tying up the phone. It runs around $4,000 to set up plus a small monthly fee.',
-    ],
-  },
-  {
-    // generic pricing fallback
-    test: /\b(price|pricing|cost|costs|how much|charge|rates?|expensive|afford|budget)\b|\$/,
-    answer: [
-      'Websites run $750 to $2,500 depending on scope. The 24/7 AI receptionist is $4,000 setup + $500/mo. Online ordering is around $4,000 setup plus a small monthly fee. Optional care plan $600/mo.',
-      'And the demo is free first. You only pay once you’ve seen it. Want a quick call to scope yours?',
+      'Pricing depends on exactly what you need, and we scope it with you on a quick call, no pressure.',
+      'The demo is free either way. Want me to book you a 30-minute demo?',
     ],
   },
   {

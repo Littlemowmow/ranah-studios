@@ -60,7 +60,8 @@ export default function CalendarBooking() {
   const [town, setTown] = useState('')
   const [needs, setNeeds] = useState<string[]>([])
   const [otherNeed, setOtherNeed] = useState('')
-  const [budget, setBudget] = useState('')
+  // Budget question removed (pricing is off the site). Kept empty in the record.
+  const budget = ''
   // Honeypot: bots fill hidden fields, humans never see this. Filled => silently drop.
   const [trap, setTrap] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -88,9 +89,9 @@ export default function CalendarBooking() {
     businessName.trim().length > 0 &&
     EMAIL_RE.test(email) &&
     phone.trim().length >= 7 &&
+    town.trim().length > 0 &&
     needs.length > 0 &&
     otherOk &&
-    budget.length > 0 &&
     !submitting
 
   // Month navigation bounds: this month → the month holding the last bookable day.
@@ -214,7 +215,6 @@ export default function CalendarBooking() {
     setTown('')
     setNeeds([])
     setOtherNeed('')
-    setBudget('')
     setBooking(null)
     setEngineSlots(null)
     setLoadingSlots(false)
@@ -419,11 +419,9 @@ export default function CalendarBooking() {
                 onChange={(e) => setWebsite(e.target.value)} placeholder="yoursite.com or @handle" autoComplete="url" />
             </div>
             <div>
-              <label className={labelCls} htmlFor="bk-town">
-                Town / area <span className="text-muted-soft">(optional)</span>
-              </label>
-              <input id="bk-town" className={inputCls} value={town}
-                onChange={(e) => setTown(e.target.value)} placeholder="Ann Arbor, Ypsilanti…" />
+              <label className={labelCls} htmlFor="bk-town">City &amp; state</label>
+              <input id="bk-town" className={inputCls} required value={town}
+                onChange={(e) => setTown(e.target.value)} placeholder="Ann Arbor, MI" />
             </div>
           </div>
 
@@ -452,26 +450,13 @@ export default function CalendarBooking() {
             )}
           </fieldset>
 
-          {/* Budget — required, single-select */}
-          <fieldset className="mt-5">
-            <legend className={labelCls}>Rough budget</legend>
-            <div className="flex flex-wrap gap-2">
-              {config.budgetOptions.map((b) => (
-                <button key={b} type="button" onClick={() => setBudget(b)}
-                  aria-pressed={budget === b} className={chipCls(budget === b)}>
-                  {b}
-                </button>
-              ))}
-            </div>
-          </fieldset>
-
           <div className="mt-5">
             <label className={labelCls} htmlFor="bk-msg">
-              Anything else <span className="text-muted-soft">(optional)</span>
+              What would you like to cover? <span className="text-muted-soft">(optional)</span>
             </label>
             <textarea id="bk-msg" className={`${inputCls} min-h-[88px] resize-y`} value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="What's the biggest gap right now: being found on Google, missed calls, both?" />
+              placeholder="Why you're reaching out, and the biggest gap right now: being found on Google, missed calls, both?" />
           </div>
 
           {bookError && (

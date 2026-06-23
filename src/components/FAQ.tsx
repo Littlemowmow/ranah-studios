@@ -9,15 +9,7 @@ const FAQS = [
   },
   {
     q: 'Do I pay anything upfront?',
-    a: 'No. We build your demo for free before we even talk; the only paid voice items (your number + ~$0.04/min) switch on only after you’re a client and your site is live.',
-  },
-  {
-    q: 'How much is a website?',
-    a: 'Basic one-page $500, standard multi-section $1,000, full ranking SEO build $1,000–$2,500. Optional care plan $100/mo.',
-  },
-  {
-    q: 'How much is the AI receptionist?',
-    a: '$3,000 setup + $500/mo. Per-minute phone cost is billed straight through at pennies a call.',
+    a: 'No. We build your demo for free before we even talk. Anything paid only switches on after you’re a client and your site is live.',
   },
   {
     q: 'Will it make outbound calls to my customers?',

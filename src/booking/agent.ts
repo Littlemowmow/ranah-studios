@@ -204,7 +204,7 @@ function present(s: BrainState, config: BookingConfig, now: Date): BrainTurn {
       return {
         state: s,
         reply: [
-          `hi, i'm ${name} from ${config.studioName}. ask me anything about what we do: ranking websites, the 24/7 AI receptionist, pricing, or i can book you a free call. want a quick intro, or a full demo?`,
+          `hi, i'm ${name} from ${config.studioName}. ask me anything about what we do, ranking websites or the 24/7 AI receptionist, or i can book you a free 30-minute demo. ready to grab a time?`,
         ],
         chips: config.services.map((x) =>
           chip(`${x.label} · ${x.blurb}`, x.id),
@@ -432,7 +432,7 @@ export function respond(
         return {
           ...present(s, config, now),
           reply: [
-            `let's start with what you'd like: a quick intro or a full demo?`,
+            `let's get your free 30-minute demo booked. tap below to start.`,
           ],
         }
       }
