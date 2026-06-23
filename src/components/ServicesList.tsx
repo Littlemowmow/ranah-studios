@@ -175,9 +175,17 @@ export default function ServicesList() {
         {/* Staggered grid: left, right, left, right — the right column is offset
             down so the cards interlock. items-start keeps each card its natural
             height (no stretch), so the featured card never leaves a void. */}
-        <div className="mt-16 grid gap-6 md:grid-cols-2 md:items-start">
+        {/* Giga-style stagger: cards alternate left/right at ~half width and pull
+            UP to interlock, so the zigzag stays compact and airy instead of
+            cascading off the page. Mobile collapses to a full-width stack. */}
+        <div className="mt-16 flex flex-col gap-y-8 md:block">
           {[WEBSITE, ...PRODUCTS].map((p, i) => (
-            <div key={p.name} className={i % 2 === 1 ? 'md:mt-24' : ''}>
+            <div
+              key={p.name}
+              className={`w-full md:w-[48%] ${i % 2 === 1 ? 'md:ml-auto' : ''} ${
+                i > 0 ? 'md:-mt-16' : ''
+              }`}
+            >
               <ProductCard p={p} />
             </div>
           ))}
