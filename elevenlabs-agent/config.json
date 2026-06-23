@@ -1,0 +1,39 @@
+{
+  "_comment": "Concept-agnostic export of the ElevenLabs agent. Edit for a new concept, then run setup.mjs. Tool ids are per-agent (created when you attach Cal.com in the dashboard) so they are NOT listed here; attach them in the dashboard and the prompt references them by name.",
+
+  "first_message": "Hey, thanks for checking out Ranah Studios. Quick heads up, I'm an AI agent, the same kind we build for local businesses. I can tell you what we do, or book you a free demo. What brings you in today?",
+
+  "tts": {
+    "model_id": "eleven_v3_conversational",
+    "voice_id": "HNLnm2dLXPBSK0FmAPS0",
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "speed": 1,
+    "optimize_streaming_latency": 3
+  },
+
+  "calcom": {
+    "event_type_id": 6077980,
+    "tools_used_by_prompt": ["calcom_get_available_slots", "calcom_create_booking"],
+    "tools_available": [
+      "calcom_get_available_slots",
+      "calcom_create_booking",
+      "calcom_find_bookings_by_attendee",
+      "calcom_get_booking",
+      "calcom_get_all_bookings",
+      "calcom_cancel_booking"
+    ]
+  },
+
+  "data_collection": {
+    "caller_name": { "type": "string", "description": "The caller's full name." },
+    "email": { "type": "string", "description": "The caller's email (needed to book)." },
+    "phone_number": { "type": "string", "description": "The caller's best callback number." },
+    "business_name": { "type": "string", "description": "The caller's business name." },
+    "website_or_social": { "type": "string", "description": "The caller's website or social handle, if given." },
+    "city_state": { "type": "string", "description": "The caller's city and state." },
+    "reason_for_call": { "type": "string", "description": "The main thing they want to fix or cover." },
+    "product_interest": { "type": "string", "description": "Website, AI voice receptionist, both, or unsure." },
+    "booked_time": { "type": "string", "description": "The day/time of the demo they booked, if any." }
+  }
+}
