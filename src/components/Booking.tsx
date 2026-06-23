@@ -1,4 +1,4 @@
-import CalEmbed from './CalEmbed'
+import CalendarBooking from './CalendarBooking'
 
 export default function Booking() {
   return (
@@ -21,7 +21,7 @@ export default function Booking() {
           </p>
         </div>
 
-        <CalEmbed />
+        <CalendarBooking />
       </div>
     </section>
   )

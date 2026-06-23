@@ -118,6 +118,6 @@ export const bookingConfig: BookingConfig = {
   },
   slotIntervalMinutes: 30,
   bufferMinutes: 0,
-  leadTimeHours: 2,
+  leadTimeHours: 48, // must book at least 2 days (48h) ahead
   maxDaysAhead: 14,
 }
