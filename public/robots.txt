@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rana-studio.vercel.app/sitemap.xml
