@@ -46,7 +46,7 @@ export default function ProcessBand() {
                 style={{ fontSize: 'clamp(2rem, 4.2vw, 3.25rem)', lineHeight: 0.98, letterSpacing: '-0.03em' }}
               >
                 Your site is built{' '}
-                <em className="italic text-fg">before we ever talk</em>.
+                <em className="not-italic text-fg">before we ever talk</em>.
               </h2>
               <p className="mt-6 max-w-sm text-base leading-relaxed text-muted">
                 No deposit, no risk. You see the real thing on your phone, then decide.

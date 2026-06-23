@@ -34,17 +34,17 @@ const WEBSITE: Product = {
       features: [
         'Custom, on-brand one-page site',
         'Your own domain, built to load fast',
-        'Mobile-friendly and conversion-focused',
+        'Mobile-friendly, built to bring in customers',
       ],
     },
     {
       label: 'Full custom + SEO build',
       features: [
         'Everything in Base',
-        'Multi-section build',
-        'Local SEO: silo + schema',
-        'Local-area landing pages',
-        'Google Business Profile aligned',
+        'Full multi-page site',
+        'Built to rank in local search',
+        'Pages for the areas you serve',
+        'Google Business Profile set up',
         'Engineered to rank on Google',
       ],
     },
@@ -64,7 +64,7 @@ const PRODUCTS: Product[] = [
       'Answers every inbound call',
       'Books into your calendar',
       'Hands off to a human on request',
-      'Inbound only, TCPA / SB 351 safe',
+      'Inbound calls only, fully compliant',
     ],
   },
   {
@@ -128,7 +128,7 @@ function ProductCard({ p }: { p: Product }) {
       <p className="mt-6 text-base leading-relaxed text-muted">{p.desc}</p>
 
       {p.tiers ? (
-        <div className="mb-8 mt-7 space-y-6">
+        <div className="mt-7 space-y-6">
           {p.tiers.map((tier) => (
             <div key={tier.label}>
               <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-gold-soft">
@@ -156,7 +156,42 @@ function ProductCard({ p }: { p: Product }) {
         </ul>
       )}
 
+      {p.featured && <SitePreview />}
+
       <DemoButton featured={p.featured} />
+    </div>
+  )
+}
+
+// Grows (flex-1) to fill the flagship card so its bottom lines up with the
+// stacked right column. Turns the otherwise-empty space into a product preview.
+function SitePreview() {
+  return (
+    <div className="mb-8 mt-8 flex min-h-[150px] flex-1 flex-col overflow-hidden rounded-xl border border-line bg-ink-base/50">
+      <div className="flex items-center gap-1.5 border-b border-line px-3 py-2.5">
+        <span className="h-2 w-2 rounded-full bg-white/15" />
+        <span className="h-2 w-2 rounded-full bg-white/15" />
+        <span className="h-2 w-2 rounded-full bg-white/15" />
+        <span className="ml-2 flex-1 truncate rounded bg-white/[0.04] px-2 py-1 text-[10px] text-muted">
+          yourbusiness.com
+        </span>
+        <span className="rounded-full border border-gold/40 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-gold-soft">
+          #1 on Google
+        </span>
+      </div>
+      <div className="flex flex-1 flex-col gap-3 p-5">
+        <div className="h-4 w-2/3 rounded bg-cream/15" />
+        <div className="h-2.5 w-1/2 rounded bg-white/10" />
+        <div className="grid grid-cols-3 gap-3 pt-2">
+          <div className="h-14 rounded-lg bg-white/[0.05]" />
+          <div className="h-14 rounded-lg bg-white/[0.05]" />
+          <div className="h-14 rounded-lg bg-gold/20" />
+        </div>
+        <div className="mt-auto space-y-2 pt-2">
+          <div className="h-2.5 w-3/4 rounded bg-white/10" />
+          <div className="h-2.5 w-2/3 rounded bg-white/10" />
+        </div>
+      </div>
     </div>
   )
 }
@@ -185,9 +220,9 @@ export default function ServicesList() {
         {/* Bento: flagship Website on the left, Voice receptionist + Care plan
             stacked on the right. items-start keeps each its natural height (no
             stretch = no void). Mobile collapses to a single-column stack. */}
-        <div className="mt-16 grid gap-6 md:grid-cols-2 md:items-start">
+        <div className="mt-16 grid gap-6 md:grid-cols-2 md:items-stretch">
           <ProductCard p={WEBSITE} />
-          <div className="grid gap-6">
+          <div className="grid gap-6 md:grid-rows-2">
             {PRODUCTS.map((p) => (
               <ProductCard key={p.name} p={p} />
             ))}

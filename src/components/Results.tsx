@@ -23,7 +23,7 @@ export default function Results() {
             style={{ fontSize: 'clamp(2rem, 5vw, 3.75rem)', lineHeight: 0.98, letterSpacing: '-0.03em' }}
           >
             We make you found, and{' '}
-            <em className="italic text-fg">prove it every month</em>.
+            <em className="not-italic text-fg">prove it every month</em>.
           </h2>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
             We promise the mechanism, not a number we cannot control. You get the

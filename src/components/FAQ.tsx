@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: 'Will it make outbound calls to my customers?',
-    a: 'No. Inbound only, it answers calls that come in. Never outbound AI calls to consumers, which keeps you TCPA + Michigan-compliant.',
+    a: 'No. Inbound only, it answers calls that come in. It never makes outbound AI calls to your customers, so you stay fully compliant.',
   },
   {
     q: 'Does it pretend to be a person?',
@@ -29,7 +29,7 @@ const FAQS = [
   },
   {
     q: 'Who do you work with?',
-    a: 'Independent, owner-operated local businesses that are phone-heavy, dental, salons, barbershops, podiatry, clinics, cafés, nail spas, trades, auto.',
+    a: 'Any business looking to scale and free up time, through automation and a website built to actually get found. We do it across local services, dental, salons, trades, clinics, cafes, auto, and beyond.',
   },
 ]
 

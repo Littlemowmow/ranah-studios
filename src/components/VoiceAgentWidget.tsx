@@ -6,6 +6,29 @@ import { useEffect } from 'react'
 
 const AGENT_ID = 'agent_0901kvpjy6vbfem9hts4ntq5pkw6' // Ranah Studios — Site Demo (voice: Roger)
 
+// Opens the ElevenLabs widget by clicking its launcher inside the shadow DOM
+// (the embed exposes no imperative open() API or global). Wired to the
+// "Hear how it works" link so visitors can start a live call with the agent.
+export function openVoiceAgent() {
+  const el = document.getElementById('ranah-voice-agent') as HTMLElement | null
+  if (!el) return
+  const root = (el as HTMLElement & { shadowRoot: ShadowRoot | null }).shadowRoot
+  if (root) {
+    const clickables = Array.from(root.querySelectorAll<HTMLElement>('button, [role="button"], a'))
+    const pick =
+      clickables.find((c) =>
+        /call|start|open|talk|hear|chat|need help/i.test(
+          c.getAttribute('aria-label') || c.textContent || '',
+        ),
+      ) || clickables[0]
+    if (pick) {
+      pick.click()
+      return
+    }
+  }
+  el.click()
+}
+
 export default function VoiceAgentWidget() {
   useEffect(() => {
     if (!document.querySelector('script[data-convai-embed]')) {
@@ -19,10 +42,10 @@ export default function VoiceAgentWidget() {
       const el = document.createElement('elevenlabs-convai')
       el.id = 'ranah-voice-agent'
       el.setAttribute('agent-id', AGENT_ID)
-      // Start as a small collapsed launcher, not the large expanded "Need help?"
-      // card, which dominated the screen on mobile. Tap to open the call.
-      el.setAttribute('variant', 'compact')
+      // Rest collapsed: a small launcher (orb + expand chevron), not the large
+      // expanded "Need help?" card. Tap (or "Hear how it works") to open it.
       el.setAttribute('default-expanded', 'false')
+      el.setAttribute('show-avatar-when-collapsed', 'true')
       document.body.appendChild(el)
     }
   }, [])

@@ -54,7 +54,7 @@ const KB: Entry[] = [
     // outbound / spam / compliance
     test: /\b(outbound|cold call|spam|call my customers|tcpa|compliant|compliance|legal)\b/,
     answer: [
-      'Inbound only. It answers calls that come in, never outbound AI calls to your customers. That keeps you TCPA + Michigan SB 351 compliant.',
+      'Inbound only. It answers calls that come in, never outbound AI calls to your customers, so you stay fully compliant.',
     ],
   },
   {
@@ -68,7 +68,7 @@ const KB: Entry[] = [
     // websites / ranking / SEO
     test: /\b(website|web ?site|web design|landing page|redesign|rank|ranking|google|seo|found online|search)\b/,
     answer: [
-      'Fast, mobile-friendly, on-brand sites on your own domain, built as a real ranking search build (silo + schema + local-area pages + Google Business Profile), not just a pretty page. The point is getting you found on Google.',
+      'Fast, mobile-friendly sites on your own domain, built to actually rank on Google and bring in local customers, not just look pretty. The point is getting you found.',
     ],
   },
   {
@@ -82,7 +82,7 @@ const KB: Entry[] = [
     // who / fit / industries
     test: /\b(who.*(you )?(work|for)|right for|fit|industr|business type|niche|do you work with)\b/,
     answer: [
-      'Independent, owner-operated local businesses that live on the phone: dental, salons, barbershops, podiatry, clinics, cafés, nail spas, trades, auto. If you lose calls or are hard to find on Google, you’re a fit.',
+      'Any business looking to scale and free up time, through automation and a website built to actually get found. We do it across local services, dental, salons, trades, clinics, cafes, auto, and beyond.',
     ],
   },
   {
