@@ -4,7 +4,7 @@ export default function TwoOfferSplit() {
   const { ref, shown } = useReveal<HTMLDivElement>()
 
   return (
-    <section id="offer" className="bg-ink-base pt-20 pb-12 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20">
+    <section id="offer" className="bg-ink-base pt-24 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28">
       <div
         ref={ref}
         className={`reveal mx-auto w-full max-w-6xl px-6 sm:px-8 ${shown ? 'is-in' : ''}`}

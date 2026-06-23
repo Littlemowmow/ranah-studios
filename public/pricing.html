@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcng9IjIyIiBmaWxsPSIjMDAwMDAwIi8+CiAgPHRleHQgeD0iNTAiIHk9IjU0IiBmb250LWZhbWlseT0iR2VvcmdpYSwgJ1RpbWVzIE5ldyBSb21hbicsIHNlcmlmIiBmb250LXNpemU9IjY0IiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCI+UjwvdGV4dD4KPC9zdmc+Cg=="
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,400&display=swap"
+      rel="stylesheet"
+    />
+    <title>Ranah Studios · Pricing</title>
+    <meta
+      name="description"
+      content="Ranah Studios pricing: a full custom website build and a 24/7 AI voice receptionist. Free demo first."
+    />
+    <style>
+      :root {
+        --ink: #0b0b0c;
+        --navy: #04222f;
+        --cream: #f2ece0;
+        --fg: #ffffff;
+        --muted: #9a9a9f;
+        --muted-soft: #6e6e74;
+        --gold: #c9a24b;
+        --gold-soft: #e4cb86;
+        --line: rgba(255, 255, 255, 0.08);
+        --line-strong: rgba(255, 255, 255, 0.14);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      body {
+        font-family: 'Geist', system-ui, sans-serif;
+        color: var(--cream);
+        background-color: var(--ink);
+        background-image: radial-gradient(125% 70% at 50% 0%, #0a4256 0%, #04222f 40%, #0b0b0c 78%);
+        min-height: 100vh;
+        line-height: 1.5;
+      }
+      .wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 72px 24px 88px;
+      }
+      .eyebrow {
+        font-family: 'IBM Plex Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        font-size: 12px;
+        color: var(--gold-soft);
+      }
+      .display {
+        font-family: 'Newsreader', Georgia, serif;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 1.02;
+        color: var(--cream);
+      }
+      header {
+        text-align: center;
+        margin-bottom: 56px;
+      }
+      .wordmark {
+        font-family: 'Newsreader', Georgia, serif;
+        letter-spacing: 0.32em;
+        font-size: 22px;
+        color: var(--cream);
+        margin-bottom: 28px;
+      }
+      header .display {
+        font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+        margin: 18px 0 16px;
+      }
+      header .display em {
+        font-style: italic;
+        color: var(--fg);
+      }
+      .lede {
+        max-width: 36rem;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+      .lede strong {
+        color: var(--cream);
+        font-weight: 600;
+      }
+      .grid {
+        display: grid;
+        gap: 22px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 760px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+          align-items: start;
+        }
+      }
+      .card {
+        position: relative;
+        border-radius: 20px;
+        padding: 34px 30px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.015);
+      }
+      .card.featured {
+        border: none;
+        background: linear-gradient(180deg, rgba(201, 162, 75, 0.16), rgba(201, 162, 75, 0.05) 40%, transparent);
+        box-shadow:
+          inset 0 0 0 2px rgba(201, 162, 75, 0.55),
+          0 0 70px -20px rgba(201, 162, 75, 0.5);
+      }
+      .tag {
+        position: absolute;
+        top: 28px;
+        right: 28px;
+        font-family: 'IBM Plex Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 10px;
+        color: var(--gold-soft);
+        border: 1px solid rgba(201, 162, 75, 0.5);
+        border-radius: 999px;
+        padding: 5px 11px;
+      }
+      .label {
+        font-family: 'IBM Plex Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 12px;
+        color: var(--gold-soft);
+      }
+      .price {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 6px 10px;
+        margin-top: 22px;
+      }
+      .price .amt {
+        font-family: 'Newsreader', Georgia, serif;
+        font-size: clamp(2.5rem, 5vw, 3.25rem);
+        line-height: 1;
+        color: var(--cream);
+      }
+      .price .unit {
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      .price .sub {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--gold-soft);
+      }
+      .note {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .desc {
+        margin-top: 18px;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      ul {
+        list-style: none;
+        margin-top: 26px;
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+      }
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 11px;
+        font-size: 0.95rem;
+        color: var(--cream);
+      }
+      li svg {
+        flex-shrink: 0;
+        margin-top: 3px;
+        color: var(--gold);
+      }
+      footer {
+        margin-top: 56px;
+        text-align: center;
+      }
+      .addon {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        margin-bottom: 28px;
+      }
+      .addon strong {
+        color: var(--cream);
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--gold);
+        color: var(--ink);
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 15px 16px 15px 28px;
+        transition: background-color 0.2s ease;
+      }
+      .cta:hover {
+        background: var(--gold-soft);
+      }
+      .cta .arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        border: 1px solid rgba(11, 11, 12, 0.4);
+      }
+      .finep {
+        margin-top: 22px;
+        font-size: 0.85rem;
+        color: var(--muted-soft);
+      }
+      .finep a {
+        color: var(--gold-soft);
+        text-decoration: none;
+      }
+      @media print {
+        body {
+          background: var(--ink);
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        .wrap {
+          padding: 32px 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="wordmark">RANAH&nbsp;STUDIOS</div>
+        <p class="eyebrow">Pricing</p>
+        <h1 class="display">
+          Two builds that <em>move the needle</em>.
+        </h1>
+        <p class="lede">
+          A site built to actually rank, and an AI receptionist that never misses a call.
+          <strong>Free demo first</strong>. You only pay once you have seen it and want it live.
+        </p>
+      </header>
+
+      <div class="grid">
+        <!-- Website, full custom build -->
+        <section class="card featured">
+          <span class="tag">Most picked</span>
+          <p class="label">Website &middot; full custom build</p>
+          <div class="price">
+            <span class="amt">$2,500</span>
+            <span class="unit">/ one-time</span>
+          </div>
+          <p class="note">starts at $750 for a base one-page build</p>
+          <p class="desc">
+            A full custom site engineered to actually rank on Google, not just look good.
+          </p>
+          <ul>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Custom, on-brand multi-section design
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Your own domain, built to load fast
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Local SEO: silo + schema
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Local-area landing pages
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Google Business Profile aligned
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Engineered to rank on Google
+            </li>
+          </ul>
+        </section>
+
+        <!-- 24/7 Voice AI agent -->
+        <section class="card">
+          <p class="label">24/7 voice AI agent</p>
+          <div class="price">
+            <span class="amt">$4,000</span>
+            <span class="unit">/ setup</span>
+            <span class="sub">+ $500 / mo</span>
+          </div>
+          <p class="desc">
+            A 24/7 AI receptionist that answers every inbound call in your name and books the appointment.
+          </p>
+          <ul>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Answers every inbound call
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Books into your calendar
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Answers hours and services from your own details
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Hands off to a human on request
+            </li>
+            <li>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Inbound only, TCPA / Michigan SB 351 safe
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <footer>
+        <p class="addon">
+          Optional <strong>care plan $600 / mo</strong> keeps everything ranking, online, and hands-off.
+        </p>
+        <a class="cta" href="https://littlemowmow.github.io/ranah-studios/#book">
+          Book a free demo
+          <span class="arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+        <p class="finep">
+          Ranah Studios &middot; Metro Detroit &middot;
+          <a href="https://littlemowmow.github.io/ranah-studios/">ranahstudios.com</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

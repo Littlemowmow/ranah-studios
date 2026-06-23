@@ -12,7 +12,10 @@ interface Product {
   /** muted note under the price, e.g. a range ceiling */
   priceNote?: string
   desc: string
-  features: string[]
+  features?: string[]
+  /** Optional tiered breakdown (e.g. Website base vs full build), shown as
+      labeled groups so what each price gets is unambiguous. */
+  tiers?: { label: string; features: string[] }[]
   featured?: boolean
 }
 
@@ -25,13 +28,26 @@ const WEBSITE: Product = {
   priceNote: 'up to $2,500 for a full custom + SEO build',
   desc: 'From a fast one-page site to a full custom build engineered to actually rank on Google, not just look good.',
   featured: true,
-  features: [
-    'Custom, on-brand design',
-    'Your own domain, built to load fast',
-    'Local SEO: silo + schema',
-    'Local-area landing pages',
-    'Google Business Profile aligned',
-    'Scales from one page to a full site',
+  tiers: [
+    {
+      label: 'Base build',
+      features: [
+        'Custom, on-brand one-page site',
+        'Your own domain, built to load fast',
+        'Mobile-friendly and conversion-focused',
+      ],
+    },
+    {
+      label: 'Full custom + SEO build',
+      features: [
+        'Everything in Base',
+        'Multi-section build',
+        'Local SEO: silo + schema',
+        'Local-area landing pages',
+        'Google Business Profile aligned',
+        'Engineered to rank on Google',
+      ],
+    },
   ],
 }
 
@@ -52,7 +68,7 @@ const PRODUCTS: Product[] = [
     ],
   },
   {
-    name: 'Online ordering',
+    name: 'Business ordering system',
     icon: ShoppingBag,
     price: '~$4,000',
     unit: 'setup',
@@ -68,7 +84,7 @@ const PRODUCTS: Product[] = [
   {
     name: 'Care plan',
     icon: LifeBuoy,
-    price: '$250',
+    price: '$600',
     unit: 'per month',
     desc: 'Optional. Keeps everything ranking, online, and completely hands-off after launch.',
     features: [
@@ -123,28 +139,36 @@ function ProductCard({ p }: { p: Product }) {
         <span className="text-sm font-medium text-gold-soft">{p.name}</span>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span
-          className="font-display font-normal leading-none text-cream"
-          style={{ fontSize: p.featured ? 'clamp(2.75rem, 5vw, 3.75rem)' : 'clamp(2rem, 3vw, 2.5rem)' }}
-        >
-          {p.price}
-        </span>
-        <span className="text-sm text-muted">/ {p.unit}</span>
-        {p.sub && <span className="text-sm font-medium text-gold-soft">{p.sub}</span>}
-      </div>
-      {p.priceNote && <p className="mt-1.5 text-xs text-muted">{p.priceNote}</p>}
+      <p className="mt-6 text-base leading-relaxed text-muted">{p.desc}</p>
 
-      <p className="mt-5 text-sm leading-relaxed text-muted">{p.desc}</p>
-
-      <ul className="mb-8 mt-7 space-y-3">
-        {p.features.map((feat) => (
-          <li key={feat} className="flex items-start gap-2.5 text-sm text-cream">
-            <Check size={15} className="mt-0.5 shrink-0 text-gold" />
-            <span>{feat}</span>
-          </li>
-        ))}
-      </ul>
+      {p.tiers ? (
+        <div className="mb-8 mt-7 space-y-6">
+          {p.tiers.map((tier) => (
+            <div key={tier.label}>
+              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em] text-gold-soft">
+                {tier.label}
+              </p>
+              <ul className="space-y-3">
+                {tier.features.map((feat) => (
+                  <li key={feat} className="flex items-start gap-2.5 text-sm text-cream">
+                    <Check size={15} className="mt-0.5 shrink-0 text-gold" />
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <ul className="mb-8 mt-7 space-y-3">
+          {p.features?.map((feat) => (
+            <li key={feat} className="flex items-start gap-2.5 text-sm text-cream">
+              <Check size={15} className="mt-0.5 shrink-0 text-gold" />
+              <span>{feat}</span>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <DemoButton featured={p.featured} />
     </div>
@@ -155,7 +179,7 @@ export default function ServicesList() {
   const { ref, shown } = useReveal<HTMLDivElement>()
 
   return (
-    <section id="services" className="bg-ink-base pt-12 pb-24 sm:pt-16 sm:pb-28 lg:pt-20 lg:pb-32">
+    <section id="services" className="bg-ink-base pt-16 pb-28 sm:pt-20 sm:pb-32 lg:pt-24 lg:pb-40">
       <div
         ref={ref}
         className={`reveal mx-auto w-full max-w-6xl px-6 sm:px-8 ${shown ? 'is-in' : ''}`}
@@ -168,7 +192,7 @@ export default function ServicesList() {
           >
             <span className="text-gold-soft">Free demo first.</span>
             <br />
-            <span className="text-cream">Then plain pricing.</span>
+            <span className="text-cream">Built around your business.</span>
           </h2>
         </div>
 
@@ -191,7 +215,7 @@ export default function ServicesList() {
           ))}
         </div>
 
-        <p className="mx-auto mt-8 max-w-2xl text-center font-mono text-xs leading-relaxed tracking-[0.02em] text-muted">
+        <p className="mx-auto mt-12 max-w-2xl text-center font-mono text-xs leading-relaxed tracking-[0.02em] text-muted">
           Every project starts with a free demo built for your business. You only
           pay once you have seen it and want it live.
         </p>

@@ -125,6 +125,15 @@ async function main() {
 }
 
 main().catch((err) => {
+  // On Vercel's remote builder, Chromium's system libs (libnspr4 etc.) are
+  // absent, so puppeteer can't launch. Prod is deployed via `vercel --prebuilt`
+  // (built locally, where Chrome works), so a remote build never needs to
+  // prerender — skip gracefully there instead of failing the deploy. Locally
+  // (and any non-Vercel CI) the prerender is required, so fail loudly.
+  if (process.env.VERCEL) {
+    console.warn('[prerender] skipped on Vercel remote builder (no system Chromium):', err.message);
+    process.exit(0);
+  }
   console.error('[prerender] FAILED:', err);
   process.exit(1);
 });

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Hero from './components/Hero'
+import TrustStrip from './components/TrustStrip'
 import TwoOfferSplit from './components/TwoOfferSplit'
 import ServicesList from './components/ServicesList'
 import ProcessBand from './components/ProcessBand'
@@ -9,6 +10,7 @@ import Footer from './components/Footer'
 import LiveBooking from './components/LiveBooking'
 import WhatsAppButton from './components/WhatsAppButton'
 import VoiceAgentWidget from './components/VoiceAgentWidget'
+import { Analytics } from '@vercel/analytics/react'
 
 function App() {
   // Live Cal.com booking widget, gated behind #test-booking so the public site is
@@ -27,6 +29,7 @@ function App() {
   return (
     <div className="min-h-screen w-full bg-ink-base font-body text-cream antialiased">
       <Hero />
+      <TrustStrip />
       <TwoOfferSplit />
       <ServicesList />
       <Booking />
@@ -35,6 +38,7 @@ function App() {
       <Footer />
       <WhatsAppButton />
       <VoiceAgentWidget />
+      <Analytics />
     </div>
   )
 }

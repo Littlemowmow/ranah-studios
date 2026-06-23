@@ -33,7 +33,7 @@ const KB: Entry[] = [
     test: /\b(website|web ?site|site|web design|seo).*(price|pricing|cost|how much|charge)|\b(price|pricing|cost|how much|charge).*(website|web ?site|site)\b/,
     answer: [
       'Websites start at $750 for a one-page site and go up to $2,500 for a full custom build with ranking SEO (silo, schema, local-area pages, Google Business Profile aligned).',
-      'There’s an optional $250/mo care plan that keeps everything hands-off after launch.',
+      'There’s an optional $600/mo care plan that keeps everything hands-off after launch.',
     ],
   },
   {
@@ -54,7 +54,7 @@ const KB: Entry[] = [
     // generic pricing fallback
     test: /\b(price|pricing|cost|costs|how much|charge|rates?|expensive|afford|budget)\b|\$/,
     answer: [
-      'Websites run $750 to $2,500 depending on scope. The 24/7 AI receptionist is $4,000 setup + $500/mo. Online ordering is around $4,000 setup plus a small monthly fee. Optional care plan $250/mo.',
+      'Websites run $750 to $2,500 depending on scope. The 24/7 AI receptionist is $4,000 setup + $500/mo. Online ordering is around $4,000 setup plus a small monthly fee. Optional care plan $600/mo.',
       'And the demo is free first. You only pay once you’ve seen it. Want a quick call to scope yours?',
     ],
   },

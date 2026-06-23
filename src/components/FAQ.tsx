@@ -46,7 +46,7 @@ export default function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(0)
 
   return (
-    <section id="faq" className="bg-ink-base py-24 sm:py-28 lg:py-32">
+    <section id="faq" className="bg-ink-base py-28 sm:py-32 lg:py-40">
       <div
         ref={ref}
         className={`reveal mx-auto w-full max-w-3xl px-6 sm:px-8 ${shown ? 'is-in' : ''}`}

@@ -123,7 +123,7 @@ export default function Booking() {
   }
 
   return (
-    <section id="book" className="bg-ink-base py-24 sm:py-28 lg:py-32">
+    <section id="book" className="bg-ink-base py-28 sm:py-32 lg:py-40">
       <div className="mx-auto w-full max-w-3xl px-6">
         <div className="text-center">
           <h2

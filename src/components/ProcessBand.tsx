@@ -34,7 +34,7 @@ export default function ProcessBand() {
   return (
     <section id="process" className="bg-ink-base">
       <div ref={ref} className={`band-reveal bg-ink-base ${shown ? 'is-in' : ''}`}>
-        <div className="band-content mx-auto w-full max-w-5xl px-6 py-24 sm:px-8 sm:py-28 lg:py-32">
+        <div className="band-content mx-auto w-full max-w-5xl px-6 py-28 sm:px-8 sm:py-32 lg:py-40">
           <p className="font-mono text-[12px] uppercase tracking-[0.18em] text-gold-soft">
             How we work
           </p>
